@@ -3,4 +3,6 @@
     <string name="kelola_jasa">Kelola Jasa</string>
     <string name="kelola">Kelola</string>
     <string name="kategori_jasa_satuan">Kategori, Jasa, Satuan</string>
+    <string name="tambah_jasa">Tambah Jasa</string>
+    <string name="kategori">Kategori</string>
 </resources>
