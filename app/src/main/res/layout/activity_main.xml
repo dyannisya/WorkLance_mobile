@@ -44,10 +44,12 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="190dp"
         android:text="Kategori"
-        android:textColor="#FFFFFF"
+        android:textColor="#939393"
         android:textSize="12sp"
-        app:backgroundTint="#B3B3B3"
+        app:backgroundTint="#FFFFFF"
         app:cornerRadius="10dp"
+        app:strokeColor="#939393"
+        app:strokeWidth="1dp"
         tools:ignore="MissingConstraints,DuplicateSpeakableTextCheck"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -74,13 +76,15 @@
         android:layout_marginStart="275dp"
         android:layout_marginTop="190dp"
         android:text="Satuan"
-        android:textColor="#FFFFFF"
+        android:textColor="#939393"
         android:textSize="12sp"
-        app:backgroundTint="#B3B3B3"
+        app:backgroundTint="#FFFFFF"
         app:cornerRadius="10dp"
-        tools:ignore="MissingConstraints,TextSizeCheck"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#939393"
+        app:strokeWidth="1dp"
+        tools:ignore="MissingConstraints,TextSizeCheck" />
 
     <TextView
         android:id="@+id/tambahjasa"
@@ -104,9 +108,10 @@
         android:background="@drawable/bg_card"
         android:orientation="vertical"
         android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/tambahjasa"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tambahjasa"
         tools:ignore="MissingConstraints">
 
 
@@ -146,7 +151,7 @@
             android:id="@+id/editTextText4"
             android:layout_width="318dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_search"
+            android:background="@drawable/bg_card"
             android:ems="10"
             android:inputType="text"
             android:minHeight="48dp"
