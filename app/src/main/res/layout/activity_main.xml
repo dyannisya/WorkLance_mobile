@@ -39,7 +39,7 @@
         android:textSize="12sp"
         app:backgroundTint="#B3B3B3"
         app:cornerRadius="10dp"
-        tools:ignore="MissingConstraints"
+        tools:ignore="MissingConstraints,DuplicateSpeakableTextCheck"
         tools:layout_editor_absoluteX="25dp"
         tools:layout_editor_absoluteY="190dp" />
 
@@ -57,7 +57,7 @@
         tools:layout_editor_absoluteY="190dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn1"
+        android:id="@+id/btn3"
         android:layout_width="111dp"
         android:layout_height="48dp"
         android:text="Satuan"
