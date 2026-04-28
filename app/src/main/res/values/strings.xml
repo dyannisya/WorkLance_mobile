@@ -5,4 +5,19 @@
     <string name="kategori_jasa_satuan">Kategori, Jasa, Satuan</string>
     <string name="tambah_jasa">Tambah Jasa</string>
     <string name="kategori">Kategori</string>
+    <string name="btnkategori">Kategori</string>
+    <string name="aksi">Aksi</string>
+    <string name="nama_jasa">Nama Jasa *</string>
+    <string name="pilih_kategori">Pilih Kategori *</string>
+    <string name="namajasa">Nama Jasa</string>
+    <string-array name="kategori_jasa">
+        <item>Desain Kreatif</item>
+        <item>Teknisi Perbaikan</item>
+        <item>Foto/Videografi</item>
+        <item>Pendidikan/Les</item>
+        <item>IT Digital</item>
+        <item>Rumah Tangga</item>
+        <item>Tukang Kontruksi</item>
+        <item>Event Hiburan</item>
+    </string-array>
 </resources>
