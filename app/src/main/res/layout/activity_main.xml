@@ -204,46 +204,94 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/HeaderTable"
         android:layout_width="364dp"
-        android:layout_height="309dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="#FFFFFF"
         android:elevation="2dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardForm"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toBottomOf="@+id/cardForm">
 
-        <TextView
-            android:layout_width="121dp"
-            android:layout_height="31dp"
-            android:gravity="center"
-            android:text="@string/namajasa"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="121dp"
-            android:layout_height="31dp"
-            android:gravity="center"
-            android:text="@string/btnkategori"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="121dp"
+                android:layout_height="31dp"
+                android:gravity="center"
+                android:text="Nama Jasa"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="121dp"
-            android:layout_height="31dp"
-            android:gravity="center"
-            android:text="@string/aksi"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="121dp"
+                android:layout_height="31dp"
+                android:gravity="center"
+                android:text="@string/btnkategori"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:layout_width="121dp"
+                android:layout_height="31dp"
+                android:gravity="center"
+                android:text="@string/aksi"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="#FFFFFF">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="left"
+                android:text="Desain Logo" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:text="Desain Kreatif"
+                android:gravity="left"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:src="@drawable/ic_edit"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+
+                <ImageView
+                    android:src="@drawable/ic_delete_action"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
