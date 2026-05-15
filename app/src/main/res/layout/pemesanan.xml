@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF5F5">
+
+    <!-- HEADER -->
+    <RelativeLayout
+        android:id="@+id/headerBanner"
+        android:layout_width="match_parent"
+        android:layout_height="185dp"
+        android:background="#161E54"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/icon_back"
+            android:tint="#FFFFFF" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="50dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:tint="#FFFFFF" />
+
+    </RelativeLayout>
+
+    <!-- CARD FREELANCER -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardFreelancer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="-60dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="10dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/headerBanner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Badge + Foto -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- KIRI -->
+                <LinearLayout
+                    android:layout_width="250dp"
+                    android:layout_height="80dp"
+                    android:orientation="vertical"
+                    android:layout_alignParentStart="true">
+
+                    <!-- Badge -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Desain Kreatif"
+                        android:textColor="#F16D34"
+                        android:textSize="10sp"
+                        android:background="@drawable/bg_transparan"/>
+
+                    <!-- Nama -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Desain Konten"
+                        android:textColor="#1A1A2E"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp" />
+
+                    <!-- Garis -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="1dp"
+                        android:background="#D9D9D9" />
+
+                    <!-- Harga -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp500.000 / Project"
+                        android:textColor="#F16D34"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="2dp" />
+
+                </LinearLayout>
+
+                <!-- FOTO PROFIL -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_alignParentEnd="true">
+
+                    <ImageView
+                        android:id="@+id/imgProfil"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/bg_circle_gray"
+                        android:scaleType="centerCrop"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        android:contentDescription="Foto Profil" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Andi Wijaya"
+                        android:textColor="#555555"
+                        android:textSize="11sp"
+                        android:gravity="center"
+                        android:layout_marginTop="4dp" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <!-- Rating & Lokasi -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <!-- Rating -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_transparan"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="0dp"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@android:drawable/btn_star_big_on" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 4.5 (5 Ulasan)"
+                        android:textColor="#333333"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+                <!-- Lokasi -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_transparan"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="0dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="6dp">
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@android:drawable/ic_menu_mylocation" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Sidoarjo"
+                        android:textColor="#333333"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- SCROLL CONTENT -->
+    <ScrollView
+        android:id="@+id/scrollContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/cardFreelancer"
+        app:layout_constraintBottom_toTopOf="@id/btnPesan"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
+
+            <!-- GALERI FOTO -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="15dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="140dp"
+                        android:layout_height="90dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="#E0E0E0"
+                        android:scaleType="centerCrop"
+                        android:src="@android:drawable/ic_menu_gallery" />
+
+                    <ImageView
+                        android:layout_width="140dp"
+                        android:layout_height="90dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="#D0D0D0"
+                        android:scaleType="centerCrop"
+                        android:src="@android:drawable/ic_menu_gallery" />
+
+                    <ImageView
+                        android:layout_width="140dp"
+                        android:layout_height="90dp"
+                        android:background="#E8E8E8"
+                        android:scaleType="centerCrop"
+                        android:src="@android:drawable/ic_menu_gallery" />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <!-- DESKRIPSI -->
+            <LinearLayout
+                android:layout_width="385dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bg_card"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:text="Deskripsi"
+                    android:textColor="#1A1A2E"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:drawableStart="@drawable/description"
+                    android:drawablePadding="6dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#F16D34"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/tvDeskripsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="3dp"
+                    android:text="Jasa desain konten media sosial untuk membantu meningkatkan tampilan dan branding bisnis Anda. Saya menyediakan desain yang menarik, rapi, dan konsisten sesuai dengan identitas brand. Cocok untuk kebutuhan promosi, edukasi, maupun konten harian di platform seperti Instagram dan Facebook."
+                    android:textColor="#555555"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <!-- ULASAN -->
+            <?xml version="1.0" encoding="utf-8"?>
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⭐ Ulasan"
+                    android:textColor="#F16D34"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp" />
+
+                <!-- ── Ulasan 1 ── -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ahmad Fauzi"
+                            android:textColor="#1A1A2E"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="04 Apr 2026"
+                            android:textColor="#F16D34"
+                            android:textSize="10sp"
+                            android:background="@drawable/bg_badge_date"
+                            android:paddingLeft="6dp"
+                            android:paddingRight="6dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true" />
+                    </RelativeLayout>
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="5"
+                        android:isIndicator="true"
+                        android:stepSize="1"
+                        android:layout_marginTop="4dp"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+
+                        android:progressTint="#F16D34"
+                        android:secondaryProgressTint="#F16D34"
+                        android:progressBackgroundTint="#FF986A" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pelayanannya sangat cepat"
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#F16D34"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+
+                <!-- ── Ulasan 2 ── -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yola Yoli"
+                            android:textColor="#1A1A2E"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="02 Apr 2026"
+                            android:textColor="#F16D34"
+                            android:textSize="10sp"
+                            android:background="@drawable/bg_badge_date"
+                            android:paddingLeft="6dp"
+                            android:paddingRight="6dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true" />
+                    </RelativeLayout>
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="5"
+                        android:isIndicator="true"
+                        android:stepSize="1"
+                        android:layout_marginTop="4dp"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+
+                        android:progressTint="#F16D34"
+                        android:secondaryProgressTint="#F16D34"
+                        android:progressBackgroundTint="#FF986A" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sangat Rekomen"
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#F16D34"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+
+                <!-- ── Ulasan 3 ── -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fauzan"
+                            android:textColor="#1A1A2E"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="01 Apr 2026"
+                            android:textColor="#F16D34"
+                            android:textSize="10sp"
+                            android:background="@drawable/bg_badge_date"
+                            android:paddingLeft="6dp"
+                            android:paddingRight="6dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true" />
+                    </RelativeLayout>
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="4"
+                        android:isIndicator="true"
+                        android:stepSize="1"
+                        android:layout_marginTop="4dp"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+
+                        android:progressTint="#F16D34"
+                        android:secondaryProgressTint="#F16D34"
+                        android:progressBackgroundTint="#FF986A" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ok Sip"
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#F16D34"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+
+                <!-- ── Ulasan 4 ── -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ahmad Ilham"
+                            android:textColor="#1A1A2E"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="31 Mar 2026"
+                            android:textColor="#F16D34"
+                            android:textSize="10sp"
+                            android:background="@drawable/bg_badge_date"
+                            android:paddingLeft="6dp"
+                            android:paddingRight="6dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true" />
+                    </RelativeLayout>
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="5"
+                        android:isIndicator="true"
+                        android:stepSize="1"
+                        android:layout_marginTop="4dp"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+
+                        android:progressTint="#F16D34"
+                        android:secondaryProgressTint="#F16D34"
+                        android:progressBackgroundTint="#FF986A" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jos"
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#F16D34"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+
+                <!-- ── Ulasan 5 ── -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yogi Pratama"
+                            android:textColor="#1A1A2E"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="10 Mar 2026"
+                            android:textColor="#F16D34"
+                            android:textSize="10sp"
+                            android:background="@drawable/bg_badge_date"
+                            android:paddingLeft="6dp"
+                            android:paddingRight="6dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true" />
+                    </RelativeLayout>
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="4"
+                        android:isIndicator="true"
+                        android:stepSize="1"
+                        android:layout_marginTop="4dp"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+
+                        android:progressTint="#F16D34"
+                        android:secondaryProgressTint="#F16D34"
+                        android:progressBackgroundTint="#FF986A" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sesuai banget jos"
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- BUTTON PESAN -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPesan"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_margin="12dp"
+        android:text="Pesan"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:backgroundTint="#161E54"
+        app:cornerRadius="12dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
