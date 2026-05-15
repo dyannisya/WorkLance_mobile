@@ -147,7 +147,7 @@
             tools:ignore="MissingConstraints" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinnerKategori"
             android:layout_width="327dp"
             android:layout_height="48dp"
             android:entries="@array/kategori_jasa"
@@ -168,7 +168,7 @@
             tools:ignore="MissingConstraints" />
 
         <EditText
-            android:id="@+id/editTextText4"
+            android:id="@+id/inputNama"
             android:layout_width="327dp"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_card"
@@ -183,7 +183,7 @@
             tools:ignore="TextSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button3"
+            android:id="@+id/btnSimpan"
             android:layout_width="327dp"
             android:layout_height="48dp"
             android:layout_marginTop="12dp"
@@ -193,8 +193,7 @@
             app:backgroundTint="#161E54"
             app:cornerRadius="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </LinearLayout>
 
@@ -246,46 +245,20 @@
             android:layout_height="1dp"
             android:background="#E0E0E0" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/txtEmpty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:background="#FFFFFF">
+            android:text="Belum ada jasa"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:visibility="gone"/>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="left"
-                android:text="Desain Logo" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_height="wrap_content"
-                android:text="Desain Kreatif"
-                android:gravity="left"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1.5"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:src="@drawable/ic_edit"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"/>
-
-                <ImageView
-                    android:src="@drawable/ic_delete_action"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="8dp"/>
-            </LinearLayout>
-        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
     </LinearLayout>
 
 
