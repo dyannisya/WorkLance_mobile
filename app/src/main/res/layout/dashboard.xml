@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:fontFamily="inter">
+    android:background="#FFFFFF">
 
     <!-- ===== TOP BAR (di luar ScrollView, sticky di atas) ===== -->
     <LinearLayout
@@ -115,9 +114,7 @@
             android:textColorHint="#B3B3B3"
             tools:ignore="MissingConstraints"
             android:drawableEnd="@drawable/icon_search"
-            android:drawablePadding="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:drawablePadding="5dp" />
 
         <!-- ===== SECTION: Pencarian Teratas ===== -->
         <LinearLayout
@@ -153,7 +150,7 @@
                 android:scrollbars="none">
 
                 <LinearLayout
-                    android:layout_width="148dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="191dp"
                     android:orientation="horizontal">
 
