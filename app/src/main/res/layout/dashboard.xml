@@ -164,7 +164,8 @@
                             android:layout_width="148dp"
                             android:layout_height="191dp"
                             android:background="@drawable/bg_card"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:id="@+id/card1">
 
                             <ImageView
                                 android:layout_width="match_parent"

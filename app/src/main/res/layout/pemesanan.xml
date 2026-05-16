@@ -20,14 +20,16 @@
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/icon_back" />
+            android:src="@drawable/icon_back"
+            android:tint="#FFFFFF" />
 
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="150dp"
             android:layout_marginTop="50dp"
-            android:src="@android:drawable/ic_menu_gallery"/>
+            android:src="@android:drawable/ic_menu_gallery"
+            android:tint="#FFFFFF" />
 
     </RelativeLayout>
 
@@ -290,6 +292,7 @@
             </LinearLayout>
 
             <!-- ULASAN -->
+            <?xml version="1.0" encoding="utf-8"?>
             <LinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
