@@ -1,6 +1,8 @@
 package com.example.kelolajasa;
 
+import android.content.Intent; // WAJIB untuk menggunakan Intent
 import android.os.Bundle;
+import android.widget.Button; // WAJIB untuk menggunakan Button
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,16 +11,31 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+    Button btnMasuk, btnDaftar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.start_screen);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        btnMasuk = findViewById(R.id.btnMasuk);
+        btnDaftar = findViewById(R.id.btnDaftar);
+
+        btnMasuk.setOnClickListener(v -> {
+            Intent intentMasuk = new Intent(MainActivity.this, MasukAkunActivity.class);
+            startActivity(intentMasuk);
+        });
+
+        btnDaftar.setOnClickListener(v -> {
+            Intent intentDaftar = new Intent(MainActivity.this, DaftarAkunActivity.class);
+            startActivity(intentDaftar);
         });
     }
 }
