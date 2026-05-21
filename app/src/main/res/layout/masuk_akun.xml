@@ -155,6 +155,7 @@
             android:layout_marginTop="40dp"
             android:backgroundTint="#1A237E"
             android:text="Masuk"
+            android:textColor="#FFFFFF"
             android:textAllCaps="false"
             android:textSize="16sp"
             app:cornerRadius="12dp"
