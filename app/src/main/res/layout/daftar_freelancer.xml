@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1A237E">
+    android:background="#161E54">
 
     <LinearLayout
         android:id="@+id/headerLayout"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:text="Daftar Freelancer"
-                android:textColor="#1A237E"
+                android:textColor="#161E54"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -82,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rizky Pratama"
-                        android:textColor="#1A237E"
+                        android:textColor="#161E54"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="Kategori Keahlian Utama *"
-                android:textColor="#1A237E"
+                android:textColor="#161E54"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:drawableStartCompat="@drawable/ic_koper"
@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Harga Dasar Minimum Order *"
-                android:textColor="#1A237E"
+                android:textColor="#161E54"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:drawableStartCompat="@drawable/ic_harga"
@@ -190,7 +190,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Pilih Jasa Yang Anda Sediakan"
-                android:textColor="#1A237E"
+                android:textColor="#161E54"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:drawableStartCompat="@drawable/ic_pilih"
@@ -214,7 +214,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Nama Jasa"
-                android:textColor="#1A237E"
+                android:textColor="#161E54"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:drawableStartCompat="@drawable/ic_edit_orange"
@@ -236,7 +236,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Deskripsi Profil"
-                android:textColor="#1A237E"
+                android:textColor="#161E54"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:drawableStartCompat="@drawable/ic_deskripsi"
@@ -266,7 +266,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tambahkan Gambar Header"
-                    android:textColor="#1A237E"
+                    android:textColor="#161E54"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:drawableStartCompat="@drawable/ic_gambar"

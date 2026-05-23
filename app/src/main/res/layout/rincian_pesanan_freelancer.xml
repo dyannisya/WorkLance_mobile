@@ -8,7 +8,7 @@
     android:id="@+id/bgHeaderBlue"
     android:layout_width="match_parent"
     android:layout_height="140dp"
-    android:background="#1A237E"
+    android:background="#161E54"
     app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
@@ -27,7 +27,7 @@
             android:id="@+id/btnBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@android:drawable/ic_media_previous"
+            android:src="@drawable/icon_back"
             app:tint="#FFFFFF" />
 
         <TextView
@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="ID Pesanan : 07862839"
-                    android:textColor="#1A237E"
+                    android:textColor="#161E54"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -106,7 +106,7 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="8dp"
                     android:text="Detail Pesanan"
-                    android:textColor="#1A237E"
+                    android:textColor="#161E54"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:drawableStartCompat="@android:drawable/ic_menu_agenda" /> <LinearLayout
@@ -130,7 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Vania Putri"
-                        android:textColor="#1A237E"
+                        android:textColor="#161E54"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -150,7 +150,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Jl.Rungkut no.17"
-                        android:textColor="#1A237E"
+                        android:textColor="#161E54"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -177,7 +177,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Desain Kreatif"
-                            android:textColor="#1A237E"
+                            android:textColor="#161E54"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -197,7 +197,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Desain Poster"
-                            android:textColor="#1A237E"
+                            android:textColor="#161E54"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -224,7 +224,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="16 Maret 2026"
-                            android:textColor="#1A237E"
+                            android:textColor="#161E54"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -244,7 +244,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Rp200.000"
-                            android:textColor="#1A237E"
+                            android:textColor="#161E54"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -261,7 +261,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Buat poster promo dengan tema minimalis dan warna dominan biru. Tambahkan teks &quot;Diskon 50%&quot; dan sertakan logo di bagian bawah. Gunakan font yang jelas dan mudah dibaca."
-                    android:textColor="#1A237E"
+                    android:textColor="#161E54"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -279,7 +279,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ubah status pesanan"
-                    android:textColor="#1A237E"
+                    android:textColor="#161E54"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -316,7 +316,7 @@
             android:id="@+id/btnHubungiClient"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:backgroundTint="#1A237E"
+            android:backgroundTint="#161E54"
             android:text="Hubungi Client"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"

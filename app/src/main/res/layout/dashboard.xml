@@ -37,6 +37,7 @@
             android:src="@drawable/ic_avatar" />
     </LinearLayout>
 
+    <!-- ===== BUTTOM NAV (di luar ScrollView, sticky di atas) ===== -->
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"

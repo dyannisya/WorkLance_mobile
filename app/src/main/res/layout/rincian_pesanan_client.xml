@@ -8,7 +8,7 @@
     android:id="@+id/bgHeaderBlue"
     android:layout_width="match_parent"
     android:layout_height="140dp"
-    android:background="#1A237E"
+    android:background="#161E54"
     app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
@@ -27,7 +27,7 @@
             android:id="@+id/btnBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@android:drawable/ic_media_previous"
+            android:src="@drawable/icon_back"
             app:tint="#FFFFFF" />
 
         <TextView
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="ID Pesanan : 03864539"
-                    android:textColor="#1A237E"
+                    android:textColor="#161E54"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -215,7 +215,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Detail Freelancer"
-                    android:textColor="#1A237E"
+                    android:textColor="#161E54"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:drawableStartCompat="@android:drawable/ic_menu_myplaces"
@@ -240,7 +240,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dewi Rahmawati"
-                        android:textColor="#1A237E"
+                        android:textColor="#161E54"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -255,7 +255,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rp400.000"
-                        android:textColor="#1A237E"
+                        android:textColor="#161E54"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -275,7 +275,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dokumentasi Acara"
-                        android:textColor="#1A237E"
+                        android:textColor="#161E54"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -290,7 +290,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Project"
-                        android:textColor="#1A237E"
+                        android:textColor="#161E54"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -310,7 +310,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Detail Pesanan"
-                    android:textColor="#1A237E"
+                    android:textColor="#161E54"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:drawableStartCompat="@android:drawable/ic_menu_agenda"
@@ -335,7 +335,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="7 Maret 2026"
-                        android:textColor="#1A237E"
+                        android:textColor="#161E54"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -355,7 +355,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Jl.Rungkut no.17"
-                        android:textColor="#1A237E"
+                        android:textColor="#161E54"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -372,7 +372,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Saya membutuhkan jasa dokumentasi untuk acara seminar kampus yang akan dilaksanakan selama 1 hari. Dibutuhkan foto dan video dokumentasi"
-                    android:textColor="#1A237E"
+                    android:textColor="#161E54"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -399,10 +399,10 @@
             android:backgroundTint="#FFFFFF"
             android:text="Beri Ulasan"
             android:textAllCaps="false"
-            android:textColor="#1A237E"
+            android:textColor="#161E54"
             android:textSize="16sp"
             app:cornerRadius="12dp"
-            app:strokeColor="#1A237E"
+            app:strokeColor="#161E54"
             app:strokeWidth="1dp" />
 
         <Space
@@ -414,7 +414,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            android:backgroundTint="#1A237E"
+            android:backgroundTint="#161E54"
             android:text="Pesan Lagi"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
