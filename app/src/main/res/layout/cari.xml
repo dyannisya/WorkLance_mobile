@@ -97,7 +97,8 @@
                 android:layout_marginTop="15dp"
                 android:text="Desain Kreatif"
                 android:textColor="#161E54"
-                android:textSize="13sp"
+                android:textSize="15sp"
+                android:paddingHorizontal="20dp"
                 android:background="@drawable/bg_transparan_biru"/>
 
             <TextView
@@ -107,7 +108,8 @@
                 android:layout_marginTop="15dp"
                 android:text="Teknisi"
                 android:textColor="#161E54"
-                android:textSize="13sp"
+                android:textSize="15sp"
+                android:paddingHorizontal="20dp"
                 android:background="@drawable/bg_transparan_biru"/>
 
             <TextView
@@ -115,9 +117,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:text="Rumah Tangga"
+                android:text="IT Digital"
                 android:textColor="#161E54"
-                android:textSize="13sp"
+                android:textSize="15sp"
+                android:paddingHorizontal="20dp"
                 android:background="@drawable/bg_transparan_biru"/>
 
         </LinearLayout>
@@ -136,7 +139,8 @@
                 android:layout_marginTop="15dp"
                 android:text="Foto Videografi"
                 android:textColor="#161E54"
-                android:textSize="13sp"
+                android:textSize="15sp"
+                android:paddingHorizontal="20dp"
                 android:background="@drawable/bg_transparan_biru"/>
 
             <TextView
@@ -146,7 +150,8 @@
                 android:layout_marginTop="15dp"
                 android:text="IT Digital"
                 android:textColor="#161E54"
-                android:textSize="13sp"
+                android:textSize="15sp"
+                android:paddingHorizontal="20dp"
                 android:background="@drawable/bg_transparan_biru"/>
 
         </LinearLayout>

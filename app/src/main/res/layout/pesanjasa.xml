@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
@@ -21,10 +22,11 @@
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="40dp"
-            android:src="@drawable/icon_back"
+            android:background="@android:color/transparent"
 
-            android:tint="#161E54"
-            android:background="@android:color/transparent"/>
+            android:src="@drawable/icon_back"
+            app:tint="#161E54"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -241,13 +243,13 @@
                     </LinearLayout>
 
                     <EditText
-                        android:id="@+id/etDeskripsi"
+                        android:id="@+id/etAlamat"
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
                         android:background="#FFFFFF"
                         android:padding="12dp"
                         android:gravity="top|start"
-                        android:hint="Ceritakan detail project Anda, dan apa yang sedang Anda butuhkan..."
+                        android:hint="Masukkan alamat lengkap anda..."
                         android:textColorHint="#BBBBBB"
                         android:textColor="#1A1A2E"
                         android:textSize="13sp"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -21,19 +22,21 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="23dp"
+            android:background="@android:color/transparent"
             android:src="@drawable/icon_back"
-            android:tint="#FFFFFF"
-            android:background="@android:color/transparent"/>
+            app:tint="#FFFFFF"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
             android:text="Chat"
             android:textColor="#FFFFFF"
             android:textSize="22sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
@@ -92,7 +95,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Untuk konsepnya mau yang seperti apa..."
-                        android:textSize="12sp"
+                        android:textSize="13sp"
                         android:textColor="#8A8A8A"
                         android:layout_marginTop="2dp"
                         android:maxLines="1"
@@ -176,7 +179,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Baik Kak."
-                        android:textSize="12sp"
+                        android:textSize="13sp"
                         android:textColor="#8A8A8A"
                         android:layout_marginTop="2dp"
                         android:maxLines="1"
@@ -274,7 +277,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Oke sip kak"
-                            android:textSize="12sp"
+                            android:textSize="13sp"
                             android:textColor="#8A8A8A"/>
 
                     </LinearLayout>
@@ -344,7 +347,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sama-sama 🤝🙏"
-                        android:textSize="12sp"
+                        android:textSize="13sp"
                         android:textColor="#8A8A8A"
                         android:layout_marginTop="2dp"
                         android:maxLines="1"
