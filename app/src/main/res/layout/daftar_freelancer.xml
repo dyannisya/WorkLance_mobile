@@ -235,7 +235,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Deskripsi Profil"
+                android:text="Deskripsi Jasa"
                 android:textColor="#161E54"
                 android:textSize="14sp"
                 android:textStyle="bold"
