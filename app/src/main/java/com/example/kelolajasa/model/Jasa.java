@@ -1,17 +1,38 @@
 package com.example.kelolajasa.model;
 
 public class Jasa {
-    private int id;
-    private String nama;
-    private String kategori;
 
-    public Jasa(int id, String nama, String kategori) {
-        this.id = id;
-        this.nama = nama;
-        this.kategori = kategori;
+    private int idJasa;
+    private int idKategori;
+    private String namaJasa;
+
+    public Jasa(int idJasa, int idKategori, String namaJasa) {
+        this.idJasa = idJasa;
+        this.idKategori = idKategori;
+        this.namaJasa = namaJasa;
     }
 
-    public int getId() { return id; }
-    public String getNama() { return nama; }
-    public String getKategori() { return kategori; }
+    public int getIdJasa() {
+        return idJasa;
+    }
+
+    public void setIdJasa(int idJasa) {
+        this.idJasa = idJasa;
+    }
+
+    public int getIdKategori() {
+        return idKategori;
+    }
+
+    public void setIdKategori(int idKategori) {
+        this.idKategori = idKategori;
+    }
+
+    public String getNamaJasa() {
+        return namaJasa;
+    }
+
+    public void setNamaJasa(String namaJasa) {
+        this.namaJasa = namaJasa;
+    }
 }
