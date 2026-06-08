@@ -91,9 +91,14 @@ public class RiwayatPesananActivity extends AppCompatActivity {
 
     private void setupTabs() {
         View.OnClickListener tabClick = v -> {
+            // Reset semua tab ke abu-abu dan tanpa garis bawah
             resetTabStyles();
+
+            // Ubah tab yang diklik menjadi oranye dan pasang garis bawah
             TextView clicked = (TextView) v;
             clicked.setTextColor(getResources().getColor(android.R.color.holo_orange_dark, null));
+            clicked.setBackgroundResource(R.drawable.bg_tab_active); // Memindahkan garis bawah
+
             loadData(clicked.getText().toString());
         };
 
@@ -106,11 +111,16 @@ public class RiwayatPesananActivity extends AppCompatActivity {
 
     private void resetTabStyles() {
         int grayColor = getResources().getColor(android.R.color.darker_gray, null);
-        if (tabSemua != null) tabSemua.setTextColor(grayColor);
-        if (tabMenunggu != null) tabMenunggu.setTextColor(grayColor);
-        if (tabDiproses != null) tabDiproses.setTextColor(grayColor);
-        if (tabSelesai != null) tabSelesai.setTextColor(grayColor);
-        if (tabDibatalkan != null) tabDibatalkan.setTextColor(grayColor);
+
+        // Kumpulkan semua tab untuk di-reset secara massal
+        TextView[] tabs = {tabSemua, tabMenunggu, tabDiproses, tabSelesai, tabDibatalkan};
+
+        for (TextView tab : tabs) {
+            if (tab != null) {
+                tab.setTextColor(grayColor);
+                tab.setBackgroundResource(R.drawable.bg_tab_transparan); // Menghapus garis bawah
+            }
+        }
     }
 
     private void loadData(String statusFilter) {
@@ -167,8 +177,10 @@ public class RiwayatPesananActivity extends AppCompatActivity {
                         Toast.makeText(this, "Status diubah ke: " + newStatus, Toast.LENGTH_SHORT).show();
                         loadData("Semua");
                         resetTabStyles();
-                        if (tabSemua != null) tabSemua.setTextColor(
-                                getResources().getColor(android.R.color.holo_orange_dark, null));
+                        if (tabSemua != null) {
+                            tabSemua.setTextColor(getResources().getColor(android.R.color.holo_orange_dark, null));
+                            tabSemua.setBackgroundResource(R.drawable.bg_tab_active); // Kembalikan garis bawah ke Semua
+                        }
                     })
                     .setNegativeButton("Batal", null)
                     .show();
@@ -205,8 +217,8 @@ public class RiwayatPesananActivity extends AppCompatActivity {
         if (btncari != null) btncari.setOnClickListener(v ->
                 startActivity(new Intent(this, CariActivity.class)));
         if (btnbag != null) btnbag.setOnClickListener(v -> {
-            if (isFreelancerView) startActivity(new Intent(this, KelolaJasaFreelancer1Activity.class));
-            else startActivity(new Intent(this, RiwayatPesananActivity.class));
+            if (isFreelancerView) startActivity(new Intent(this, KelolaJasaFreelancer2Activity.class));
+            else startActivity(new Intent(this, KelolaJasaFreelancer1Activity.class));
         });
         if (btnhome != null) btnhome.setOnClickListener(v -> {
             Intent intent = new Intent(this, DashboardActivity.class);
@@ -216,7 +228,7 @@ public class RiwayatPesananActivity extends AppCompatActivity {
         if (btnriwayat != null) btnriwayat.setOnClickListener(v ->
                 Toast.makeText(this, "Riwayat Pesanan", Toast.LENGTH_SHORT).show());
         if (btnprofil != null) btnprofil.setOnClickListener(v ->
-                Toast.makeText(this, "Profil — Coming Soon", Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(this, ProfilActivity.class)));
     }
 
     @Override

@@ -51,6 +51,7 @@
         <activity android:name=".KelolaJasaFreelancer1Activity" android:exported="false" />
         <activity android:name=".KelolaJasaFreelancer2Activity" android:exported="false" />
         <activity android:name=".EditJasaFreelancerActivity" android:exported="false" />
+        <activity android:name=".ProfilActivity" android:exported="false" />
     </application>
 
 </manifest>

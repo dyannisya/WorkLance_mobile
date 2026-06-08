@@ -88,10 +88,10 @@ public class DashboardActivity extends AppCompatActivity {
             // User → Riwayat Pesanan | Freelancer → Kelola Layananku
             if (idRole == SessionManager.ROLE_FREELANCER) {
                 startActivity(new Intent(DashboardActivity.this,
-                        KelolaJasaFreelancer1Activity.class));
+                        KelolaJasaFreelancer2Activity.class));
             } else {
                 startActivity(new Intent(DashboardActivity.this,
-                        RiwayatPesananActivity.class));
+                        KelolaJasaFreelancer1Activity.class));
             }
         });
 
@@ -105,21 +105,7 @@ public class DashboardActivity extends AppCompatActivity {
                         RiwayatPesananActivity.class)));
 
         btnprofil.setOnClickListener(v -> {
-            // Placeholder logout sampai ProfilActivity dibuat di Phase berikutnya
-            new androidx.appcompat.app.AlertDialog.Builder(this)
-                    .setTitle("Profil")
-                    .setMessage("Login sebagai: " + sessionManager.getNamaPengguna() +
-                            "\nRole: " + getRoleLabel(idRole))
-                    .setPositiveButton("Logout", (dialog, which) -> {
-                        sessionManager.logout();
-                        Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                                Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        finish();
-                    })
-                    .setNegativeButton("Tutup", null)
-                    .show();
+            startActivity(new Intent(DashboardActivity.this, ProfilActivity.class));
         });
 
         imgAvatar.setOnClickListener(v -> btnprofil.performClick());

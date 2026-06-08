@@ -75,6 +75,6 @@ public class KelolaJasaFreelancer1Activity extends AppCompatActivity {
         if (btnriwayat != null) btnriwayat.setOnClickListener(v ->
                 startActivity(new Intent(this, RiwayatPesananActivity.class)));
         if (btnprofil != null) btnprofil.setOnClickListener(v ->
-                Toast.makeText(this, "Profil — Coming Soon", Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(this, ProfilActivity.class)));
     }
 }
