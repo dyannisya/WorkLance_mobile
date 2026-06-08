@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="start"
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="4dp"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        app:cardBackgroundColor="#FFA67A"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="1dp"
+        app:contentPadding="10dp">
+
+        <TextView
+            android:id="@+id/tvIsiPesan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="240dp"
+            android:textColor="#212121"
+            android:textSize="14sp"
+            android:lineSpacingExtra="2dp" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvWaktu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="4dp"
+        android:textColor="#9E9E9E"
+        android:textSize="10sp" />
+</LinearLayout>

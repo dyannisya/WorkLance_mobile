@@ -136,6 +136,7 @@
 
 
         <TextView
+            android:id="@+id/labelKategori"
             android:layout_width="232dp"
             android:layout_height="19dp"
             android:text="@string/pilih_kategori"
@@ -150,12 +151,12 @@
             android:id="@+id/spinnerKategori"
             android:layout_width="327dp"
             android:layout_height="48dp"
-            android:entries="@array/kategori_jasa"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
 
         <TextView
+            android:id="@+id/labelNama"
             android:layout_width="232dp"
             android:layout_height="19dp"
             android:layout_marginTop="12dp"

@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/imgBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="10dp"
@@ -67,6 +68,7 @@
 
                     <!-- Badge -->
                     <TextView
+                        android:id="@+id/tvKategori"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Desain Kreatif"
@@ -76,6 +78,7 @@
 
                     <!-- Nama -->
                     <TextView
+                        android:id="@+id/tvNamaLayanan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Desain Konten"
@@ -93,6 +96,7 @@
 
                     <!-- Harga -->
                     <TextView
+                        android:id="@+id/tvHarga"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rp500.000 / Project"
@@ -121,6 +125,7 @@
                         android:contentDescription="Foto Profil" />
 
                     <TextView
+                        android:id="@+id/tvNamaFreelancer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Andi Wijaya"
@@ -156,6 +161,7 @@
                         android:src="@android:drawable/btn_star_big_on" />
 
                     <TextView
+                        android:id="@+id/tvRating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" 4.5 (5 Ulasan)"
@@ -181,6 +187,7 @@
                         android:src="@android:drawable/ic_menu_mylocation" />
 
                     <TextView
+                        android:id="@+id/tvLokasi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" Sidoarjo"

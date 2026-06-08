@@ -14,7 +14,6 @@
         android:id="@+id/linearLayoutNav"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="845dp"
         android:background="#FFFFFF"
         android:elevation="4dp"
         android:gravity="center_vertical"
@@ -22,7 +21,7 @@
         android:paddingStart="52dp"
         android:paddingEnd="52dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
             android:id="@+id/btncari"
@@ -116,6 +115,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvCountMenunggu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -145,6 +145,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvCountDiproses"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="72dp"
@@ -191,6 +192,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvCountSelesai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -220,6 +222,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvCountDibatalkan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="72dp"

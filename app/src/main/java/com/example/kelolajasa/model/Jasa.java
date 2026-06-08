@@ -5,6 +5,7 @@ public class Jasa {
     private int idJasa;
     private int idKategori;
     private String namaJasa;
+    private String namaKategori = ""; // diisi dari JOIN query, tidak disimpan di DB
 
     public Jasa(int idJasa, int idKategori, String namaJasa) {
         this.idJasa = idJasa;
@@ -12,27 +13,17 @@ public class Jasa {
         this.namaJasa = namaJasa;
     }
 
-    public int getIdJasa() {
-        return idJasa;
-    }
+    public int getIdJasa() { return idJasa; }
+    public void setIdJasa(int idJasa) { this.idJasa = idJasa; }
 
-    public void setIdJasa(int idJasa) {
-        this.idJasa = idJasa;
-    }
+    public int getIdKategori() { return idKategori; }
+    public void setIdKategori(int idKategori) { this.idKategori = idKategori; }
 
-    public int getIdKategori() {
-        return idKategori;
-    }
+    public String getNamaJasa() { return namaJasa; }
+    public void setNamaJasa(String namaJasa) { this.namaJasa = namaJasa; }
 
-    public void setIdKategori(int idKategori) {
-        this.idKategori = idKategori;
-    }
-
-    public String getNamaJasa() {
-        return namaJasa;
-    }
-
-    public void setNamaJasa(String namaJasa) {
-        this.namaJasa = namaJasa;
+    public String getNamaKategori() { return namaKategori; }
+    public void setNamaKategori(String namaKategori) {
+        this.namaKategori = namaKategori != null ? namaKategori : "";
     }
 }

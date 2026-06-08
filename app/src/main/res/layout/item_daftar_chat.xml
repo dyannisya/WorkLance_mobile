@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="12dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Avatar -->
+    <ImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_avatar"
+        android:scaleType="centerCrop"
+        android:background="@drawable/rounded_image_bg" />
+
+    <!-- Waktu & badge unread (pojok kanan) -->
+    <LinearLayout
+        android:id="@+id/layoutRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/tvWaktu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:textColor="#9E9E9E" />
+
+        <TextView
+            android:id="@+id/tvUnread"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/badge_notif"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!-- Nama & pesan terakhir (tengah) -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/ivAvatar"
+        android:layout_toStartOf="@id/layoutRight"
+        android:layout_marginStart="12dp"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvNamaLawan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#161E54"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/tvNamaLayanan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:textColor="#1565C0"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/tvPesanTerakhir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:maxLines="1"
+            android:ellipsize="end" />
+    </LinearLayout>
+
+    <!-- Divider bawah -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/ivAvatar"
+        android:layout_marginTop="12dp"
+        android:background="#F0F0F0" />
+
+</RelativeLayout>

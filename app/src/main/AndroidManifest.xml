@@ -20,9 +20,9 @@
             android:name=".MasukAkunActivity"
             android:exported="false" />
         <activity android:name=".DashboardActivity" />
-        <activity android:name=".PemesananActivity" />
-        <activity android:name=".PesanJasaActivity" />
-        <activity android:name=".RingkasanPesananActivity" />
+        <activity android:name=".PemesananActivity" android:exported="false" />
+        <activity android:name=".PesanJasaActivity" android:exported="false" />
+        <activity android:name=".RingkasanPesananActivity" android:exported="false" />
         <activity android:name=".CustomerChatActivity" />
         <activity
             android:name=".MainActivity"
@@ -33,6 +33,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AdminDashboardActivity" android:exported="false" />
+        <activity android:name=".RiwayatPesananActivity" android:exported="false" />
+        <activity android:name=".CariActivity" android:exported="false" />
+        <activity android:name=".KategoriActivity" android:exported="false" />
+        <activity android:name=".DaftarFreelancerActivity" android:exported="false" />
+        <activity android:name=".RincianPesananClientActivity" android:exported="false" />
+        <activity android:name=".RincianPesananFreelancerActivity" android:exported="false" />
+        <activity android:name=".DaftarChatActivity" android:exported="false" />
+        <activity android:name=".KelolaJasaActivity" android:exported="false" />
+        <activity android:name=".KelolaKategoriActivity" android:exported="false" />
+        <activity android:name=".KelolaSatuanActivity" android:exported="false" />
+        <activity android:name=".KelolaPenggunaActivity" android:exported="false" />
+        <activity android:name=".KelolaFreelanceActivity" android:exported="false" />
+        <activity android:name=".KelolaPengajuanActivity" android:exported="false" />
+        <activity android:name=".KelolaBookingActivity" android:exported="false" />
+        <activity android:name=".KelolaJasaFreelancer1Activity" android:exported="false" />
+        <activity android:name=".KelolaJasaFreelancer2Activity" android:exported="false" />
+        <activity android:name=".EditJasaFreelancerActivity" android:exported="false" />
     </application>
 
 </manifest>
