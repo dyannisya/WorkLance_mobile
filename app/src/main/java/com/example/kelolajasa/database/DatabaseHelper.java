@@ -7,160 +7,77 @@ import android.content.Context;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "worklance.db";
-    private static final int DATABASE_VERSION = 2;
+    // Bump ke 4 → paksa onUpgrade rebuild + seed ulang data dummy
+    private static final int DATABASE_VERSION = 4;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    // =========================  ROLE  =========================
     private static final String CREATE_ROLE =
-            "CREATE TABLE role (" +
-                    "id_role INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "nama_role TEXT" +
-                    ");";
+            "CREATE TABLE role (id_role INTEGER PRIMARY KEY AUTOINCREMENT, nama_role TEXT);";
 
-    // =========================  PROVINSI  =========================
     private static final String CREATE_PROVINSI =
-            "CREATE TABLE provinsi (" +
-                    "id_provinsi INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "nama_provinsi TEXT" +
-                    ");";
+            "CREATE TABLE provinsi (id_provinsi INTEGER PRIMARY KEY AUTOINCREMENT, nama_provinsi TEXT);";
 
-    // =========================  KABUPATEN  =========================
     private static final String CREATE_KABUPATEN =
-            "CREATE TABLE kabupaten (" +
-                    "id_kabupaten INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "id_provinsi INTEGER," +
-                    "nama_kabupaten TEXT" +
-                    ");";
+            "CREATE TABLE kabupaten (id_kabupaten INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "id_provinsi INTEGER, nama_kabupaten TEXT);";
 
-    // =========================  KECAMATAN  =========================
     private static final String CREATE_KECAMATAN =
-            "CREATE TABLE kecamatan (" +
-                    "id_kecamatan INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "id_kabupaten INTEGER," +
-                    "nama_kecamatan TEXT" +
-                    ");";
+            "CREATE TABLE kecamatan (id_kecamatan INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "id_kabupaten INTEGER, nama_kecamatan TEXT);";
 
-    // =========================  DESA  =========================
     private static final String CREATE_DESA =
-            "CREATE TABLE desa (" +
-                    "id_desa INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "id_kecamatan INTEGER," +
-                    "nama_desa TEXT" +
-                    ");";
+            "CREATE TABLE desa (id_desa INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "id_kecamatan INTEGER, nama_desa TEXT);";
 
-    // =========================  PENGGUNA  =========================
     private static final String CREATE_PENGGUNA =
-            "CREATE TABLE pengguna (" +
-                    "id_pengguna INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "id_role INTEGER," +
-                    "username TEXT," +
-                    "nama_pengguna TEXT," +
-                    "tanggal_lahir TEXT," +
-                    "no_telp TEXT," +
-                    "email TEXT," +
-                    "password TEXT," +
-                    "id_provinsi INTEGER," +
-                    "id_kabupaten INTEGER," +
-                    "id_kecamatan INTEGER," +
-                    "id_desa INTEGER," +
-                    "alamat_lengkap TEXT," +
-                    "foto_profil TEXT" +
-                    ");";
+            "CREATE TABLE pengguna (id_pengguna INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "id_role INTEGER, username TEXT, nama_pengguna TEXT, tanggal_lahir TEXT, " +
+                    "no_telp TEXT, email TEXT, password TEXT, id_provinsi INTEGER, " +
+                    "id_kabupaten INTEGER, id_kecamatan INTEGER, id_desa INTEGER, " +
+                    "alamat_lengkap TEXT, foto_profil TEXT);";
 
-    // =========================  PENGAJUAN FREELANCER  =========================
     private static final String CREATE_PENGAJUAN =
-            "CREATE TABLE pengajuan_freelancer (" +
-                    "id_pengajuan INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "id_pengguna INTEGER," +
-                    "nik TEXT," +
-                    "deskripsi TEXT," +
-                    "status TEXT," +
-                    "catatan_admin TEXT," +
-                    "tanggal_pengajuan TEXT" +
-                    ");";
+            "CREATE TABLE pengajuan_freelancer (id_pengajuan INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "id_pengguna INTEGER, nik TEXT, deskripsi TEXT, status TEXT, " +
+                    "catatan_admin TEXT, tanggal_pengajuan TEXT);";
 
-    // =========================  KATEGORI  =========================
     private static final String CREATE_KATEGORI =
-            "CREATE TABLE kategori (" +
-                    "id_kategori INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "nama_kategori TEXT" +
-                    ");";
+            "CREATE TABLE kategori (id_kategori INTEGER PRIMARY KEY AUTOINCREMENT, nama_kategori TEXT);";
 
-    // =========================  JASA  =========================
     private static final String CREATE_JASA =
-            "CREATE TABLE jasa (" +
-                    "id_jasa INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "id_kategori INTEGER," +
-                    "nama_jasa TEXT" +
-                    ");";
+            "CREATE TABLE jasa (id_jasa INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "id_kategori INTEGER, nama_jasa TEXT);";
 
-    // =========================  SATUAN  =========================
     private static final String CREATE_SATUAN =
-            "CREATE TABLE satuan (" +
-                    "id_satuan INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "nama_satuan TEXT" +
-                    ");";
+            "CREATE TABLE satuan (id_satuan INTEGER PRIMARY KEY AUTOINCREMENT, nama_satuan TEXT);";
 
-    // =========================  LAYANAN  =========================
     private static final String CREATE_LAYANAN =
-            "CREATE TABLE layanan (" +
-                    "id_layanan INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "id_pengguna INTEGER," +
-                    "id_jasa INTEGER," +
-                    "id_satuan INTEGER," +
-                    "tarif INTEGER," +
-                    "deskripsi TEXT," +
-                    "namajasa TEXT" +
-                    ");";
+            "CREATE TABLE layanan (id_layanan INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "id_pengguna INTEGER, id_jasa INTEGER, id_satuan INTEGER, " +
+                    "tarif INTEGER, deskripsi TEXT, namajasa TEXT);";
 
-    // =========================  GAMBAR LAYANAN  =========================
     private static final String CREATE_GAMBAR_LAYANAN =
-            "CREATE TABLE gambar_layanan (" +
-                    "id_gambar INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "id_layanan INTEGER," +
-                    "file_gambar TEXT" +
-                    ");";
+            "CREATE TABLE gambar_layanan (id_gambar INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "id_layanan INTEGER, file_gambar TEXT);";
 
-    // =========================  BOOKING  =========================
     private static final String CREATE_BOOKING =
-            "CREATE TABLE booking (" +
-                    "id_booking INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "id_pengguna INTEGER," +
-                    "id_layanan INTEGER," +
-                    "tanggal_booking TEXT," +
-                    "alamat_booking TEXT," +
-                    "catatan TEXT," +
-                    "status_booking TEXT" +
-                    ");";
+            "CREATE TABLE booking (id_booking INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "id_pengguna INTEGER, id_layanan INTEGER, tanggal_booking TEXT, " +
+                    "alamat_booking TEXT, catatan TEXT, status_booking TEXT);";
 
-    // =========================  ULASAN  =========================
     private static final String CREATE_ULASAN =
-            "CREATE TABLE ulasan (" +
-                    "id_ulasan INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "id_booking INTEGER," +
-                    "id_pengguna INTEGER," +
-                    "rating INTEGER," +
-                    "komentar TEXT," +
-                    "tanggal_ulasan TEXT" +
-                    ");";
+            "CREATE TABLE ulasan (id_ulasan INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "id_booking INTEGER, id_pengguna INTEGER, rating INTEGER, " +
+                    "komentar TEXT, tanggal_ulasan TEXT);";
 
-    // =========================  PESAN (CHAT) — BARU FASE 6  =========================
-    // Setiap percakapan terikat pada id_booking supaya konteks mudah dilacak.
-    // id_pengirim & id_penerima mengacu ke tabel pengguna.
-    // dibaca: 0 = belum dibaca, 1 = sudah dibaca
     private static final String CREATE_PESAN =
-            "CREATE TABLE pesan (" +
-                    "id_pesan INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "id_booking INTEGER NOT NULL," +
-                    "id_pengirim INTEGER NOT NULL," +
-                    "id_penerima INTEGER NOT NULL," +
-                    "isi_pesan TEXT NOT NULL," +
-                    "waktu_kirim TEXT NOT NULL," +
-                    "dibaca INTEGER DEFAULT 0" +
-                    ");";
+            "CREATE TABLE pesan (id_pesan INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "id_booking INTEGER NOT NULL, id_pengirim INTEGER NOT NULL, " +
+                    "id_penerima INTEGER NOT NULL, isi_pesan TEXT NOT NULL, " +
+                    "waktu_kirim TEXT NOT NULL, dibaca INTEGER DEFAULT 0);";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -178,20 +95,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_GAMBAR_LAYANAN);
         db.execSQL(CREATE_BOOKING);
         db.execSQL(CREATE_ULASAN);
-        db.execSQL(CREATE_PESAN);       // ← BARU Fase 6
-
+        db.execSQL(CREATE_PESAN);
         insertDefaultData(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Migrasi bertahap: hanya tambah tabel baru di v2
-        if (oldVersion < 2) {
-            // Tabel pesan belum ada di v1 — tambahkan saja, data lain aman
-            db.execSQL(CREATE_PESAN);
-        }
-        // Jika perlu rebuild total (baris di bawah — uncomment hanya saat dev):
-        // dropAll(db); onCreate(db);
+        // Rebuild total saat versi naik (aman untuk development)
+        dropAll(db);
+        onCreate(db);
     }
 
     private void dropAll(SQLiteDatabase db) {
@@ -213,15 +125,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     private void insertDefaultData(SQLiteDatabase db) {
-        // ROLE
+
+        // ===== ROLE =====
         db.execSQL("INSERT INTO role VALUES (1,'Admin')");
         db.execSQL("INSERT INTO role VALUES (2,'User')");
         db.execSQL("INSERT INTO role VALUES (3,'Freelancer')");
 
-        // PROVINSI
+        // ===== PROVINSI =====
         db.execSQL("INSERT INTO provinsi VALUES (1,'Jawa Timur')");
 
-        // KABUPATEN
+        // ===== KABUPATEN =====
         db.execSQL("INSERT INTO kabupaten VALUES (1,1,'Surabaya')");
         db.execSQL("INSERT INTO kabupaten VALUES (2,1,'Malang')");
         db.execSQL("INSERT INTO kabupaten VALUES (3,1,'Sidoarjo')");
@@ -231,89 +144,51 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO kabupaten VALUES (7,1,'Kediri')");
         db.execSQL("INSERT INTO kabupaten VALUES (8,1,'Blitar')");
 
-        // KECAMATAN
+        // ===== KECAMATAN =====
         db.execSQL("INSERT INTO kecamatan VALUES (1,1,'Sukolilo')");
         db.execSQL("INSERT INTO kecamatan VALUES (2,1,'Rungkut')");
         db.execSQL("INSERT INTO kecamatan VALUES (3,1,'Tegalsari')");
         db.execSQL("INSERT INTO kecamatan VALUES (4,2,'Lowokwaru')");
         db.execSQL("INSERT INTO kecamatan VALUES (5,2,'Blimbing')");
-        db.execSQL("INSERT INTO kecamatan VALUES (6,2,'Klojen')");
-        db.execSQL("INSERT INTO kecamatan VALUES (7,3,'Waru')");
-        db.execSQL("INSERT INTO kecamatan VALUES (8,3,'Candi')");
-        db.execSQL("INSERT INTO kecamatan VALUES (9,3,'Taman')");
-        db.execSQL("INSERT INTO kecamatan VALUES (10,4,'Manyar')");
-        db.execSQL("INSERT INTO kecamatan VALUES (11,4,'Driyorejo')");
-        db.execSQL("INSERT INTO kecamatan VALUES (12,5,'Mojosari')");
-        db.execSQL("INSERT INTO kecamatan VALUES (13,5,'Ngoro')");
-        db.execSQL("INSERT INTO kecamatan VALUES (14,6,'Kaliwates')");
-        db.execSQL("INSERT INTO kecamatan VALUES (15,6,'Patrang')");
-        db.execSQL("INSERT INTO kecamatan VALUES (16,7,'Mojoroto')");
-        db.execSQL("INSERT INTO kecamatan VALUES (17,7,'Pesantren')");
-        db.execSQL("INSERT INTO kecamatan VALUES (18,8,'Sananwetan')");
-        db.execSQL("INSERT INTO kecamatan VALUES (19,8,'Kepanjenkidul')");
+        db.execSQL("INSERT INTO kecamatan VALUES (6,3,'Waru')");
+        db.execSQL("INSERT INTO kecamatan VALUES (7,3,'Candi')");
+        db.execSQL("INSERT INTO kecamatan VALUES (8,4,'Manyar')");
+        db.execSQL("INSERT INTO kecamatan VALUES (9,5,'Mojosari')");
+        db.execSQL("INSERT INTO kecamatan VALUES (10,6,'Kaliwates')");
 
-        // DESA
+        // ===== DESA =====
         db.execSQL("INSERT INTO desa VALUES (1,1,'Keputih')");
         db.execSQL("INSERT INTO desa VALUES (2,1,'Gebang Putih')");
         db.execSQL("INSERT INTO desa VALUES (3,2,'Rungkut Tengah')");
         db.execSQL("INSERT INTO desa VALUES (4,2,'Kedung Baruk')");
         db.execSQL("INSERT INTO desa VALUES (5,3,'Dr. Soetomo')");
-        db.execSQL("INSERT INTO desa VALUES (6,3,'Wonorejo')");
-        db.execSQL("INSERT INTO desa VALUES (7,4,'Dinoyo')");
-        db.execSQL("INSERT INTO desa VALUES (8,4,'Tlogomas')");
-        db.execSQL("INSERT INTO desa VALUES (9,5,'Purwodadi')");
-        db.execSQL("INSERT INTO desa VALUES (10,5,'Polowijen')");
-        db.execSQL("INSERT INTO desa VALUES (11,6,'Kauman')");
-        db.execSQL("INSERT INTO desa VALUES (12,6,'Sukoharjo')");
-        db.execSQL("INSERT INTO desa VALUES (13,7,'Wedoro')");
-        db.execSQL("INSERT INTO desa VALUES (14,7,'Tambak Oso')");
-        db.execSQL("INSERT INTO desa VALUES (15,8,'Gelam')");
-        db.execSQL("INSERT INTO desa VALUES (16,8,'Bligo')");
-        db.execSQL("INSERT INTO desa VALUES (17,9,'Sepanjang')");
-        db.execSQL("INSERT INTO desa VALUES (18,9,'Kedungturi')");
-        db.execSQL("INSERT INTO desa VALUES (19,10,'Manyarejo')");
-        db.execSQL("INSERT INTO desa VALUES (20,10,'Suci')");
-        db.execSQL("INSERT INTO desa VALUES (21,11,'Petiken')");
-        db.execSQL("INSERT INTO desa VALUES (22,11,'Bambe')");
-        db.execSQL("INSERT INTO desa VALUES (23,12,'Sawahan')");
-        db.execSQL("INSERT INTO desa VALUES (24,12,'Mojosari')");
-        db.execSQL("INSERT INTO desa VALUES (25,13,'Watesnegoro')");
-        db.execSQL("INSERT INTO desa VALUES (26,13,'Lolawang')");
-        db.execSQL("INSERT INTO desa VALUES (27,14,'Kebonsari')");
-        db.execSQL("INSERT INTO desa VALUES (28,14,'Sempusari')");
-        db.execSQL("INSERT INTO desa VALUES (29,15,'Jember Lor')");
-        db.execSQL("INSERT INTO desa VALUES (30,15,'Patrang')");
-        db.execSQL("INSERT INTO desa VALUES (31,16,'Campurejo')");
-        db.execSQL("INSERT INTO desa VALUES (32,16,'Bandar Kidul')");
-        db.execSQL("INSERT INTO desa VALUES (33,17,'Burengan')");
-        db.execSQL("INSERT INTO desa VALUES (34,17,'Banjaran')");
-        db.execSQL("INSERT INTO desa VALUES (35,18,'Karangtengah')");
-        db.execSQL("INSERT INTO desa VALUES (36,18,'Kepanjen Lor')");
-        db.execSQL("INSERT INTO desa VALUES (37,19,'Sananwetan')");
-        db.execSQL("INSERT INTO desa VALUES (38,19,'Tanggung')");
+        db.execSQL("INSERT INTO desa VALUES (6,4,'Dinoyo')");
+        db.execSQL("INSERT INTO desa VALUES (7,4,'Tlogomas')");
+        db.execSQL("INSERT INTO desa VALUES (8,6,'Wedoro')");
+        db.execSQL("INSERT INTO desa VALUES (9,6,'Tambak Oso')");
+        db.execSQL("INSERT INTO desa VALUES (10,7,'Gelam')");
 
-        // DEFAULT ADMIN — login: admin@worklance.com / admin123
-        db.execSQL("INSERT INTO pengguna (id_pengguna, id_role, username, nama_pengguna, " +
-                "tanggal_lahir, no_telp, email, password, id_provinsi, id_kabupaten, " +
-                "id_kecamatan, id_desa, alamat_lengkap, foto_profil) VALUES " +
-                "(1, 1, 'admin', 'Administrator', '', '081234567890', " +
-                "'admin@worklance.com', 'admin123', 0, 0, 0, 0, '', '')");
+        // ===== PENGGUNA =====
+        // Admin — login: admin@worklance.com / admin123
+        db.execSQL("INSERT INTO pengguna VALUES (1,1,'admin','Administrator',''," +
+                "'081234567890','admin@worklance.com','admin123',0,0,0,0,'','')");
 
-        // DEFAULT USER (Klien) — login: user@worklance.com / user123
-        db.execSQL("INSERT INTO pengguna (id_pengguna, id_role, username, nama_pengguna, " +
-                "tanggal_lahir, no_telp, email, password, id_provinsi, id_kabupaten, " +
-                "id_kecamatan, id_desa, alamat_lengkap, foto_profil) VALUES " +
-                "(2, 2, 'budi_user', 'Budi Santoso', '1998-05-12', '081299887766', " +
-                "'user@worklance.com', 'user123', 1, 1, 1, 1, 'Jl. Keputih No 10', '')");
+        // User/Klien — login: user@worklance.com / user123
+        db.execSQL("INSERT INTO pengguna VALUES (2,2,'budi_user','Budi Santoso'," +
+                "'1998-05-12','081299887766','user@worklance.com','user123',1,1,1,1," +
+                "'Jl. Keputih No 10','')");
 
-        // DEFAULT FREELANCER — login: freelancer@worklance.com / freelance123
-        db.execSQL("INSERT INTO pengguna (id_pengguna, id_role, username, nama_pengguna, " +
-                "tanggal_lahir, no_telp, email, password, id_provinsi, id_kabupaten, " +
-                "id_kecamatan, id_desa, alamat_lengkap, foto_profil) VALUES " +
-                "(3, 3, 'joko_free', 'Joko Handoko', '1995-08-20', '081555444333', " +
-                "'freelancer@worklance.com', 'freelance123', 1, 1, 2, 3, 'Jl. Rungkut Tengah No 5', '')");
+        // Freelancer — login: freelancer@worklance.com / freelance123
+        db.execSQL("INSERT INTO pengguna VALUES (3,3,'joko_free','Joko Handoko'," +
+                "'1995-08-20','081555444333','freelancer@worklance.com','freelance123',1,1,2,3," +
+                "'Jl. Rungkut Tengah No 5','')");
 
-        // KATEGORI
+        // Freelancer ke-2 — login: sari@worklance.com / sari123
+        db.execSQL("INSERT INTO pengguna VALUES (4,3,'sari_design','Sari Dewi'," +
+                "'1997-03-15','081677889900','sari@worklance.com','sari123',1,1,1,2," +
+                "'Jl. Gebang Putih No 7','')");
+
+        // ===== KATEGORI =====
         db.execSQL("INSERT INTO kategori VALUES (1,'Desain & Kreatif')");
         db.execSQL("INSERT INTO kategori VALUES (2,'Teknisi & Perbaikan')");
         db.execSQL("INSERT INTO kategori VALUES (3,'Fotografi & Videografi')");
@@ -323,19 +198,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO kategori VALUES (7,'Tukang & Konstruksi')");
         db.execSQL("INSERT INTO kategori VALUES (8,'Event & Hiburan')");
 
-        // SATUAN
+        // ===== SATUAN =====
         db.execSQL("INSERT INTO satuan VALUES (1,'Unit')");
         db.execSQL("INSERT INTO satuan VALUES (2,'Jam')");
         db.execSQL("INSERT INTO satuan VALUES (3,'Paket')");
         db.execSQL("INSERT INTO satuan VALUES (4,'Hari')");
         db.execSQL("INSERT INTO satuan VALUES (5,'Project')");
 
-        // JASA
+        // ===== JASA =====
         db.execSQL("INSERT INTO jasa VALUES (1,1,'Desain Logo')");
         db.execSQL("INSERT INTO jasa VALUES (2,1,'Desain Poster / Banner')");
         db.execSQL("INSERT INTO jasa VALUES (3,1,'Desain Konten Sosial Media')");
         db.execSQL("INSERT INTO jasa VALUES (4,1,'Editing Foto')");
-        db.execSQL("INSERT INTO jasa VALUES (5,1,'Editing Video Sederhana')");
+        db.execSQL("INSERT INTO jasa VALUES (5,1,'Editing Video')");
         db.execSQL("INSERT INTO jasa VALUES (6,2,'Service Alat Elektronik')");
         db.execSQL("INSERT INTO jasa VALUES (7,2,'Service AC')");
         db.execSQL("INSERT INTO jasa VALUES (8,2,'Kelistrikan Rumah')");
@@ -361,5 +236,62 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO jasa VALUES (28,8,'Penyanyi / Band')");
         db.execSQL("INSERT INTO jasa VALUES (29,8,'Dekorasi Acara')");
         db.execSQL("INSERT INTO jasa VALUES (30,8,'Wedding Organizer')");
+
+        // ===== LAYANAN (dari Joko, id_pengguna=3) =====
+        // Kolom: id_layanan, id_pengguna, id_jasa, id_satuan, tarif, deskripsi, namajasa
+        db.execSQL("INSERT INTO layanan VALUES (1,3,3,5,150000," +
+                "'Desain konten Instagram profesional untuk brand Anda. Meliputi feed post, " +
+                "story, dan reels template. Termasuk revisi 2x dan file siap upload.'," +
+                "'Desain Konten Instagram')");
+        db.execSQL("INSERT INTO layanan VALUES (2,3,1,5,500000," +
+                "'Pembuatan logo profesional untuk bisnis dan brand Anda. File diberikan dalam " +
+                "format PNG, JPG, dan SVG. Tersedia revisi 3x hingga menemukan desain yang sempurna.'," +
+                "'Desain Logo Profesional')");
+        db.execSQL("INSERT INTO layanan VALUES (3,3,17,3,2000000," +
+                "'Pembuatan website company profile atau landing page yang responsif dan modern. " +
+                "Menggunakan HTML, CSS, JavaScript. Domain dan hosting tidak termasuk.'," +
+                "'Pembuatan Website Company Profile')");
+        db.execSQL("INSERT INTO layanan VALUES (4,3,20,5,1500000," +
+                "'Desain UI/UX untuk aplikasi mobile Android atau iOS. Meliputi wireframe, mockup, " +
+                "dan prototype interaktif menggunakan Figma. Revisi tidak terbatas.'," +
+                "'UI/UX Design Aplikasi Mobile')");
+        db.execSQL("INSERT INTO layanan VALUES (5,3,2,5,200000," +
+                "'Desain poster dan banner digital untuk kebutuhan promosi bisnis Anda. Tersedia " +
+                "untuk berbagai ukuran media sosial dan cetak. Revisi 2x.'," +
+                "'Desain Poster & Banner Digital')");
+
+        // ===== LAYANAN (dari Sari, id_pengguna=4) =====
+        db.execSQL("INSERT INTO layanan VALUES (6,4,9,5,3000000," +
+                "'Sesi foto prewedding di lokasi pilihan Anda. Paket termasuk 2 outfit, editing " +
+                "profesional, dan 50 foto siap cetak. Lokasi indoor/outdoor.'," +
+                "'Foto Prewedding Profesional')");
+        db.execSQL("INSERT INTO layanan VALUES (7,4,11,3,500000," +
+                "'Foto produk berkualitas tinggi untuk kebutuhan UMKM dan marketplace. Termasuk " +
+                "editing dan background removal. Cocok untuk Tokopedia, Shopee, Instagram.'," +
+                "'Foto Produk UMKM')");
+
+        // ===== PENGAJUAN FREELANCER =====
+        // Joko sudah diterima
+        db.execSQL("INSERT INTO pengajuan_freelancer VALUES (1,3,'3578012008950001'," +
+                "'Desainer grafis dengan pengalaman 3 tahun. Terlatih dalam Adobe Photoshop, " +
+                "Illustrator, Figma, dan berbagai tools desain digital lainnya.'," +
+                "'Diterima','Pengajuan disetujui','2026-03-01')");
+
+        // Sari sudah diterima
+        db.execSQL("INSERT INTO pengajuan_freelancer VALUES (2,4,'3578015503970002'," +
+                "'Fotografer profesional dengan portofolio 5 tahun di bidang wedding dan produk. " +
+                "Berpengalaman dengan berbagai kamera DSLR dan mirrorless.'," +
+                "'Diterima','Pengajuan disetujui','2026-03-05')");
+
+        // ===== BOOKING DUMMY (user Budi memesan layanan Joko) =====
+        db.execSQL("INSERT INTO booking (id_booking,id_pengguna,id_layanan," +
+                "tanggal_booking,alamat_booking,catatan,status_booking) VALUES " +
+                "(1,2,1,'2026-04-15','Jl. Keputih No 10, Surabaya'," +
+                "'Tolong buat konten bertema Ramadan untuk promosi toko saya.','Menunggu')");
+
+        db.execSQL("INSERT INTO booking (id_booking,id_pengguna,id_layanan," +
+                "tanggal_booking,alamat_booking,catatan,status_booking) VALUES " +
+                "(2,2,2,'2026-04-18','Jl. Keputih No 10, Surabaya'," +
+                "'Butuh logo untuk bisnis kuliner baru saya. Warna dominan merah dan putih.','Diproses')");
     }
 }

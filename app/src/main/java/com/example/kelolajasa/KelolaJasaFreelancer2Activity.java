@@ -1,11 +1,11 @@
 package com.example.kelolajasa;
 
-import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -51,8 +51,8 @@ public class KelolaJasaFreelancer2Activity extends AppCompatActivity {
 
         sessionManager = new SessionManager(this);
         layananDAO = new LayananDAO(this);
-        jasaDAO = new JasaDAO(this);
-        satuanDAO = new SatuanDAO(this);
+        jasaDAO    = new JasaDAO(this);
+        satuanDAO  = new SatuanDAO(this);
 
         initViews();
         loadProfile();
@@ -61,21 +61,20 @@ public class KelolaJasaFreelancer2Activity extends AppCompatActivity {
     }
 
     private void initViews() {
-        textView2 = findViewById(R.id.textView2);
-        textView3 = findViewById(R.id.textView3);
-        textView4 = findViewById(R.id.textView4);
-        keranjang = findViewById(R.id.keranjang);
+        textView2    = findViewById(R.id.textView2);
+        textView3    = findViewById(R.id.textView3);
+        textView4    = findViewById(R.id.textView4);
+        keranjang    = findViewById(R.id.keranjang);
         containerJasa = findViewById(R.id.containerJasa);
-        btncari = findViewById(R.id.btncari);
-        btnbag = findViewById(R.id.btnbag);
-        btnhome = findViewById(R.id.btnhome);
-        btnriwayat = findViewById(R.id.btnriwayat);
-        btnprofil = findViewById(R.id.btnprofil);
+        btncari      = findViewById(R.id.btncari);
+        btnbag       = findViewById(R.id.btnbag);
+        btnhome      = findViewById(R.id.btnhome);
+        btnriwayat   = findViewById(R.id.btnriwayat);
+        btnprofil    = findViewById(R.id.btnprofil);
 
         if (keranjang != null) keranjang.setOnClickListener(v -> showTambahLayananDialog());
 
-        // Load referensi data
-        jasaList = jasaDAO.getAllWithKategori();
+        jasaList   = jasaDAO.getAllWithKategori();
         satuanList = satuanDAO.getAll();
     }
 
@@ -94,25 +93,18 @@ public class KelolaJasaFreelancer2Activity extends AppCompatActivity {
 
         if (list.isEmpty()) {
             TextView tvKosong = new TextView(this);
-            tvKosong.setText("Belum ada layanan. Tap ikon keranjang untuk menambah.");
+            tvKosong.setText("Belum ada layanan. Tap ikon + untuk menambah.");
             tvKosong.setPadding(32, 48, 32, 48);
-            tvKosong.setTextColor(getResources().getColor(android.R.color.darker_gray, null));
-            tvKosong.setGravity(android.view.Gravity.CENTER);
+            tvKosong.setTextColor(0xFF666666);
+            tvKosong.setGravity(Gravity.CENTER);
             containerJasa.addView(tvKosong);
             return;
         }
 
-        for (Layanan layanan : list) {
-            addLayananCard(layanan);
-        }
+        for (Layanan layanan : list) addLayananCard(layanan);
     }
 
     private void addLayananCard(Layanan layanan) {
-        // Inflate card layanan sederhana
-        View card = LayoutInflater.from(this).inflate(
-                android.R.layout.simple_list_item_2, containerJasa, false);
-
-        // Gunakan layout dari project jika tersedia
         LinearLayout cardLayout = new LinearLayout(this);
         cardLayout.setOrientation(LinearLayout.HORIZONTAL);
         cardLayout.setPadding(24, 24, 24, 24);
@@ -120,12 +112,11 @@ public class KelolaJasaFreelancer2Activity extends AppCompatActivity {
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
+                LinearLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(0, 0, 0, 24);
         cardLayout.setLayoutParams(params);
 
-        // Konten teks
+        // Teks konten
         LinearLayout textLayout = new LinearLayout(this);
         textLayout.setOrientation(LinearLayout.VERTICAL);
         textLayout.setLayoutParams(new LinearLayout.LayoutParams(
@@ -135,7 +126,7 @@ public class KelolaJasaFreelancer2Activity extends AppCompatActivity {
         tvNama.setText(layanan.getNamaJasa());
         tvNama.setTextSize(15f);
         tvNama.setTextColor(0xFF1A1A2E);
-        tvNama.setTypeface(null, android.graphics.Typeface.BOLD);
+        tvNama.setTypeface(null, Typeface.BOLD); // FIX: bukan setTextStyle
         textLayout.addView(tvNama);
 
         TextView tvHarga = new TextView(this);
@@ -145,41 +136,38 @@ public class KelolaJasaFreelancer2Activity extends AppCompatActivity {
         tvHarga.setTextColor(0xFF333333);
         textLayout.addView(tvHarga);
 
-        // Tombol Edit
+        // Tombol Edit + Hapus
+        LinearLayout btnLayout = new LinearLayout(this);
+        btnLayout.setOrientation(LinearLayout.VERTICAL);
+        btnLayout.setGravity(Gravity.CENTER_VERTICAL);
+
         Button btnEdit = new Button(this);
         btnEdit.setText("Edit Jasa");
-        btnEdit.setBackgroundTintList(
-                android.content.res.ColorStateList.valueOf(0xFF161E54));
+        btnEdit.setBackgroundTintList(ColorStateList.valueOf(0xFF161E54));
         btnEdit.setTextColor(0xFFFFFFFF);
-        btnEdit.setTextSize(12f);
+        btnEdit.setTextSize(11f);
         btnEdit.setOnClickListener(v -> {
             Intent intent = new Intent(this, EditJasaFreelancerActivity.class);
             intent.putExtra("id_layanan", layanan.getIdLayanan());
             startActivity(intent);
         });
 
-        // Tombol Hapus
         Button btnHapus = new Button(this);
         btnHapus.setText("Hapus");
-        btnHapus.setBackgroundTintList(
-                android.content.res.ColorStateList.valueOf(0xFFD32F2F));
+        btnHapus.setBackgroundTintList(ColorStateList.valueOf(0xFFD32F2F));
         btnHapus.setTextColor(0xFFFFFFFF);
-        btnHapus.setTextSize(12f);
-        btnHapus.setOnClickListener(v -> {
-            new AlertDialog.Builder(this)
-                    .setTitle("Hapus Layanan")
-                    .setMessage("Hapus \"" + layanan.getNamaJasa() + "\"?")
-                    .setPositiveButton("Hapus", (d, w) -> {
-                        layananDAO.delete(layanan.getIdLayanan());
-                        Toast.makeText(this, "Layanan dihapus", Toast.LENGTH_SHORT).show();
-                        loadLayananList();
-                    })
-                    .setNegativeButton("Batal", null)
-                    .show();
-        });
+        btnHapus.setTextSize(11f);
+        btnHapus.setOnClickListener(v ->
+                new AlertDialog.Builder(this)
+                        .setTitle("Hapus Layanan")
+                        .setMessage("Hapus \"" + layanan.getNamaJasa() + "\"?")
+                        .setPositiveButton("Hapus", (d, w) -> {
+                            layananDAO.delete(layanan.getIdLayanan());
+                            Toast.makeText(this, "Layanan dihapus", Toast.LENGTH_SHORT).show();
+                            loadLayananList();
+                        })
+                        .setNegativeButton("Batal", null).show());
 
-        LinearLayout btnLayout = new LinearLayout(this);
-        btnLayout.setOrientation(LinearLayout.VERTICAL);
         btnLayout.addView(btnEdit);
         btnLayout.addView(btnHapus);
 
@@ -190,21 +178,19 @@ public class KelolaJasaFreelancer2Activity extends AppCompatActivity {
 
     private void showTambahLayananDialog() {
         if (jasaList.isEmpty()) {
-            Toast.makeText(this, "Data jasa belum tersedia. Hubungi admin.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Data jasa belum tersedia. Hubungi admin.",
+                    Toast.LENGTH_SHORT).show();
             return;
         }
 
-        View dialogView = LayoutInflater.from(this).inflate(android.R.layout.simple_list_item_2, null);
-
-        // Build dialog manual
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(48, 32, 48, 16);
 
-        // Spinner Jasa
+        // Label + Spinner Jasa
         TextView lblJasa = new TextView(this);
         lblJasa.setText("Pilih Jenis Jasa:");
-        lblJasa.setTextSize(Typeface.BOLD);
+        lblJasa.setTypeface(null, Typeface.BOLD); // FIX: bukan setTextStyle
         layout.addView(lblJasa);
 
         Spinner spinnerJasa = new Spinner(this);
@@ -216,9 +202,9 @@ public class KelolaJasaFreelancer2Activity extends AppCompatActivity {
         spinnerJasa.setAdapter(jasaAdapter);
         layout.addView(spinnerJasa);
 
-        // EditText Nama Layanan
+        // Nama Layanan
         TextView lblNama = new TextView(this);
-        lblNama.setText("Nama Layanan Anda:");
+        lblNama.setText("Nama Layanan:");
         lblNama.setPadding(0, 16, 0, 4);
         layout.addView(lblNama);
 
@@ -226,7 +212,7 @@ public class KelolaJasaFreelancer2Activity extends AppCompatActivity {
         etNama.setHint("contoh: Desain Logo Profesional");
         layout.addView(etNama);
 
-        // EditText Deskripsi
+        // Deskripsi
         TextView lblDesk = new TextView(this);
         lblDesk.setText("Deskripsi:");
         lblDesk.setPadding(0, 12, 0, 4);
@@ -237,7 +223,7 @@ public class KelolaJasaFreelancer2Activity extends AppCompatActivity {
         etDesk.setMinLines(2);
         layout.addView(etDesk);
 
-        // EditText Harga
+        // Harga
         TextView lblHarga = new TextView(this);
         lblHarga.setText("Harga (Rp):");
         lblHarga.setPadding(0, 12, 0, 4);
@@ -245,7 +231,7 @@ public class KelolaJasaFreelancer2Activity extends AppCompatActivity {
 
         EditText etHarga = new EditText(this);
         etHarga.setHint("contoh: 500000");
-        etHarga.setInputType(InputType.TYPE_CLASS_NUMBER);
+        etHarga.setInputType(android.text.InputType.TYPE_CLASS_NUMBER);
         layout.addView(etHarga);
 
         // Spinner Satuan
@@ -267,8 +253,8 @@ public class KelolaJasaFreelancer2Activity extends AppCompatActivity {
                 .setTitle("Tambah Layanan Baru")
                 .setView(layout)
                 .setPositiveButton("Simpan", (d, w) -> {
-                    String nama = etNama.getText().toString().trim();
-                    String desk = etDesk.getText().toString().trim();
+                    String nama     = etNama.getText().toString().trim();
+                    String desk     = etDesk.getText().toString().trim();
                     String hargaStr = etHarga.getText().toString().trim();
 
                     if (TextUtils.isEmpty(nama) || TextUtils.isEmpty(hargaStr)) {
@@ -276,14 +262,15 @@ public class KelolaJasaFreelancer2Activity extends AppCompatActivity {
                         return;
                     }
 
-                    int selectedJasaPos = spinnerJasa.getSelectedItemPosition();
-                    int selectedSatuanPos = spinnerSatuan.getSelectedItemPosition();
+                    int selJasaPos   = spinnerJasa.getSelectedItemPosition();
+                    int selSatuanPos = spinnerSatuan.getSelectedItemPosition();
 
-                    if (selectedJasaPos < 0 || selectedJasaPos >= jasaList.size()) return;
-                    if (selectedSatuanPos < 0 || selectedSatuanPos >= (satuanList.isEmpty() ? 0 : satuanList.size())) return;
+                    // FIX: ternary precedence bug diperbaiki dengan kurung
+                    if (selJasaPos < 0 || selJasaPos >= jasaList.size()) return;
+                    if (selSatuanPos < 0 || selSatuanPos >= (satuanList.isEmpty() ? 0 : satuanList.size())) return;
 
-                    int idJasa = jasaList.get(selectedJasaPos).getIdJasa();
-                    int idSatuan = satuanList.isEmpty() ? 1 : satuanList.get(selectedSatuanPos).getIdSatuan();
+                    int idJasa   = jasaList.get(selJasaPos).getIdJasa();
+                    int idSatuan = satuanList.isEmpty() ? 1 : satuanList.get(selSatuanPos).getIdSatuan();
                     double harga = Double.parseDouble(hargaStr);
 
                     long result = layananDAO.insert(
@@ -296,8 +283,7 @@ public class KelolaJasaFreelancer2Activity extends AppCompatActivity {
                         Toast.makeText(this, "Gagal menambahkan layanan", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setNegativeButton("Batal", null)
-                .show();
+                .setNegativeButton("Batal", null).show();
     }
 
     private void setupBottomNav() {

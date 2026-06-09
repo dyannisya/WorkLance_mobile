@@ -158,7 +158,7 @@ public class CariActivity extends AppCompatActivity {
         if (btncari != null) btncari.setOnClickListener(v ->
                 Toast.makeText(this, "Cari", Toast.LENGTH_SHORT).show());
         if (btnbag != null) btnbag.setOnClickListener(v ->
-                startActivity(new Intent(this, RiwayatPesananActivity.class)));
+                startActivity(new Intent(this, KelolaJasaFreelancer1Activity.class)));
         if (btnhome != null) btnhome.setOnClickListener(v -> {
             startActivity(new Intent(this, DashboardActivity.class)
                     .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -166,7 +166,7 @@ public class CariActivity extends AppCompatActivity {
         if (btnriwayat != null) btnriwayat.setOnClickListener(v ->
                 startActivity(new Intent(this, RiwayatPesananActivity.class)));
         if (btnprofil != null) btnprofil.setOnClickListener(v ->
-                Toast.makeText(this, "Profil — Coming Soon", Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(this, ProfilActivity.class)));
     }
 
     @Override

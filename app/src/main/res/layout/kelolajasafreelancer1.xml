@@ -1,97 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <!-- ===== TOP BAR (di luar ScrollView, sticky di atas) ===== -->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="46dp"
+        android:layout_height="wrap_content"
         android:background="#FFFFFF"
         android:elevation="4dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:background="#ffffff"
-            android:drawablePadding="8dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:paddingEnd="24dp"
             android:text="Kategori Jasa Freelancer"
             android:textColor="#161E54"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- ===== BUTTOM NAV (di luar ScrollView, sticky di atas) ===== -->
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#FFFFFF"
-        android:elevation="4dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="52dp"
-        android:paddingEnd="52dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <ImageView
-            android:id="@+id/btncari"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="38dp"
-            android:src="@drawable/icon_search"
-            app:tint="#161E54"/>
-
-        <ImageView
-            android:id="@+id/btnbag"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="38dp"
-            android:src="@drawable/ic_bag" />
-
-        <ImageView
-            android:id="@+id/btnhome"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="38dp"
-            android:src="@drawable/ic_home" />
-
-        <ImageView
-            android:id="@+id/btnriwayat"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="38dp"
-            android:src="@drawable/ic_history" />
-
-        <ImageView
-            android:id="@+id/btnprofil"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/ic_profilbtn" />
-    </LinearLayout>
-
     <ImageView
         android:id="@+id/tdkadajasa"
-        android:layout_width="92dp"
-        android:layout_height="92dp"
-        android:layout_marginStart="159.5dp"
-        android:layout_marginTop="159dp"
-        android:layout_marginEnd="159.5dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="100dp"
         android:src="@drawable/ic_tdkadajasa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,50 +45,96 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="86dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="86dp"
+        android:layout_marginTop="16dp"
         android:text="Anda tidak memiliki Jasa Freelancer"
+        android:textColor="#757575"
         android:textSize="15sp"
-        android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tdkadajasa" />
 
     <LinearLayout
-        android:layout_width="364dp"
-        android:layout_height="111dp"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="24dp"
-        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/bg_daftarjasa"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginStart="88dp"
+            android:layout_height="wrap_content"
             android:text="Ingin Menjadi Freelancer?"
             android:textColor="#161E54"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/dftrfreelancer"
-            android:layout_width="326dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
             android:backgroundTint="#161E54"
-            app:cornerRadius="12dp"
             android:text="Daftar Sebagai Freelancer Sekarang"
-            android:textSize="14sp"/>
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            app:cornerRadius="12dp" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/btncari"
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_weight="1"
+            android:src="@drawable/icon_search"
+            app:tint="#161E54" />
+
+        <ImageView
+            android:id="@+id/btnbag"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_bag"
+            app:tint="#F16D34" />
+
+        <ImageView
+            android:id="@+id/btnhome"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_home" />
+
+        <ImageView
+            android:id="@+id/btnriwayat"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_history" />
+
+        <ImageView
+            android:id="@+id/btnprofil"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_profilbtn" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

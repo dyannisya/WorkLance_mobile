@@ -1,6 +1,7 @@
 package com.example.kelolajasa;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -32,7 +33,12 @@ public class KelolaPenggunaActivity extends AppCompatActivity {
 
     PenggunaDAO penggunaDAO;
     PenggunaAdapter adapter;
-    int currentRoleFilter = -1; // -1 = Semua
+    int currentRoleFilter = -1;
+
+    private static final int COLOR_ACTIVE_BG    = 0xFF161E54;
+    private static final int COLOR_ACTIVE_TEXT   = 0xFFFFFFFF;
+    private static final int COLOR_INACTIVE_BG   = 0xFFEEEEEE;
+    private static final int COLOR_INACTIVE_TEXT = 0xFF161E54;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,22 +54,95 @@ public class KelolaPenggunaActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        title = findViewById(R.id.title);
-        txtEmpty = findViewById(R.id.txtEmpty);
-        editTextText3 = findViewById(R.id.editTextText3);
+        title           = findViewById(R.id.title);
+        txtEmpty        = findViewById(R.id.txtEmpty);
+        editTextText3   = findViewById(R.id.editTextText3);
         btn1 = findViewById(R.id.btn1); // Semua
         btn2 = findViewById(R.id.btn2); // Admin
         btn3 = findViewById(R.id.btn3); // User
         btn4 = findViewById(R.id.btn4); // Freelancer
-        recyclerView = findViewById(R.id.recyclerView);
-        btncari = findViewById(R.id.btncari);
-        btnbag = findViewById(R.id.btnbag);
-        btnhome = findViewById(R.id.btnhome);
+        recyclerView    = findViewById(R.id.recyclerView);
+        btncari    = findViewById(R.id.btncari);
+        btnbag     = findViewById(R.id.btnbag);
+        btnhome    = findViewById(R.id.btnhome);
         btnriwayat = findViewById(R.id.btnriwayat);
-        btnprofil = findViewById(R.id.btnprofil);
+        btnprofil  = findViewById(R.id.btnprofil);
 
         if (title != null) title.setOnClickListener(v -> finish());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void setTabActive(MaterialButton btn, boolean active) {
+        if (btn == null) return;
+        btn.setBackgroundTintList(ColorStateList.valueOf(
+                active ? COLOR_ACTIVE_BG : COLOR_INACTIVE_BG));
+        btn.setTextColor(active ? COLOR_ACTIVE_TEXT : COLOR_INACTIVE_TEXT);
+    }
+
+    private void applyRoleFilter(int role) {
+        currentRoleFilter = role;
+        setTabActive(btn1, role == -1);
+        setTabActive(btn2, role == 1);
+        setTabActive(btn3, role == 2);
+        setTabActive(btn4, role == 3);
+        if (adapter != null) adapter.filterByRole(role);
+    }
+
+    private void setupFilterTabs() {
+        if (btn1 != null) btn1.setOnClickListener(v -> applyRoleFilter(-1));
+        if (btn2 != null) btn2.setOnClickListener(v -> applyRoleFilter(1));
+        if (btn3 != null) btn3.setOnClickListener(v -> applyRoleFilter(2));
+        if (btn4 != null) btn4.setOnClickListener(v -> applyRoleFilter(3));
+        // Set "Semua" aktif by default
+        setTabActive(btn1, true);
+        setTabActive(btn2, false);
+        setTabActive(btn3, false);
+        setTabActive(btn4, false);
+    }
+
+    private void setupSearch() {
+        if (editTextText3 == null) return;
+        editTextText3.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int st, int c, int a) {}
+            @Override public void onTextChanged(CharSequence s, int st, int b, int c) {
+                if (adapter != null) adapter.filterByKeyword(s.toString());
+            }
+            @Override public void afterTextChanged(Editable s) {}
+        });
+    }
+
+    private void loadData() {
+        List<Pengguna> list = penggunaDAO.getAllPengguna();
+        boolean isEmpty = list == null || list.isEmpty();
+        if (txtEmpty != null) txtEmpty.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+
+        adapter = new PenggunaAdapter(list, new PenggunaAdapter.ActionListener() {
+            @Override
+            public void onDelete(Pengguna p) {
+                new AlertDialog.Builder(KelolaPenggunaActivity.this)
+                        .setTitle("Hapus Pengguna")
+                        .setMessage("Hapus \"" + p.getNamaPengguna() + "\"?")
+                        .setPositiveButton("Hapus", (d, w) -> {
+                            if (penggunaDAO.deletePengguna(p.getIdPengguna()) > 0) {
+                                Toast.makeText(KelolaPenggunaActivity.this,
+                                        "Pengguna dihapus", Toast.LENGTH_SHORT).show();
+                                loadData();
+                            }
+                        })
+                        .setNegativeButton("Batal", null).show();
+            }
+            @Override
+            public void onLihat(Pengguna p) {
+                new AlertDialog.Builder(KelolaPenggunaActivity.this)
+                        .setTitle(p.getNamaPengguna())
+                        .setMessage("Username: " + p.getUsername()
+                                + "\nEmail: " + p.getEmail()
+                                + "\nNo. Telp: " + p.getNoTelp())
+                        .setPositiveButton("Tutup", null).show();
+            }
+        });
+        recyclerView.setAdapter(adapter);
+        if (currentRoleFilter != -1) adapter.filterByRole(currentRoleFilter);
     }
 
     private void setupBottomNav() {
@@ -80,83 +159,8 @@ public class KelolaPenggunaActivity extends AppCompatActivity {
                 startActivity(new Intent(this, KelolaPengajuanActivity.class)));
     }
 
-    private void setupFilterTabs() {
-        btn1.setOnClickListener(v -> applyRoleFilter(-1));   // Semua
-        btn2.setOnClickListener(v -> applyRoleFilter(1));    // Admin
-        btn3.setOnClickListener(v -> applyRoleFilter(2));    // User
-        btn4.setOnClickListener(v -> applyRoleFilter(3));    // Freelancer
-    }
-
-    private void applyRoleFilter(int role) {
-        currentRoleFilter = role;
-        if (adapter != null) adapter.filterByRole(role);
-    }
-
-    private void setupSearch() {
-        if (editTextText3 == null) return;
-        editTextText3.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int st, int c, int a) {}
-            @Override public void onTextChanged(CharSequence s, int start, int b, int c) {
-                if (adapter != null) adapter.filterByKeyword(s.toString());
-            }
-            @Override public void afterTextChanged(Editable s) {}
-        });
-    }
-
-    private void loadData() {
-        List<Pengguna> list = penggunaDAO.getAllPengguna();
-        boolean isEmpty = list == null || list.isEmpty();
-        if (txtEmpty != null) txtEmpty.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
-
-        adapter = new PenggunaAdapter(list, new PenggunaAdapter.ActionListener() {
-            @Override
-            public void onDelete(Pengguna pengguna) {
-                new AlertDialog.Builder(KelolaPenggunaActivity.this)
-                        .setTitle("Hapus Pengguna")
-                        .setMessage("Hapus pengguna \"" + pengguna.getNamaPengguna() + "\"?\n" +
-                                "Semua data terkait akan ikut terhapus.")
-                        .setPositiveButton("Hapus", (d, w) -> {
-                            int r = penggunaDAO.deletePengguna(pengguna.getIdPengguna());
-                            if (r > 0) {
-                                Toast.makeText(KelolaPenggunaActivity.this,
-                                        "Pengguna dihapus", Toast.LENGTH_SHORT).show();
-                                loadData();
-                            } else {
-                                Toast.makeText(KelolaPenggunaActivity.this,
-                                        "Gagal menghapus", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setNegativeButton("Batal", null)
-                        .show();
-            }
-
-            @Override
-            public void onLihat(Pengguna pengguna) {
-                // Tampilkan detail pengguna
-                String info = "Username: " + pengguna.getUsername() +
-                        "\nEmail: " + pengguna.getEmail() +
-                        "\nNo. Telp: " + pengguna.getNoTelp() +
-                        "\nRole ID: " + pengguna.getIdRole();
-                new AlertDialog.Builder(KelolaPenggunaActivity.this)
-                        .setTitle(pengguna.getNamaPengguna())
-                        .setMessage(info)
-                        .setPositiveButton("Tutup", null)
-                        .show();
-            }
-        });
-
-        recyclerView.setAdapter(adapter);
-        if (currentRoleFilter != -1) adapter.filterByRole(currentRoleFilter);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadData();
-    }
-
-    @Override
-    protected void onDestroy() {
+    @Override protected void onResume() { super.onResume(); loadData(); }
+    @Override protected void onDestroy() {
         super.onDestroy();
         if (penggunaDAO != null) penggunaDAO.close();
     }

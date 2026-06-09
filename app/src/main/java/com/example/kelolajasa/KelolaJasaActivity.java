@@ -1,6 +1,7 @@
 package com.example.kelolajasa;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -38,133 +39,125 @@ public class KelolaJasaActivity extends AppCompatActivity {
     Spinner spinnerKategori;
     MaterialButton btn1, btn2, btn3, btnSimpan;
     RecyclerView recyclerView;
-
-    // Bottom nav
     ImageView btncari, btnbag, btnhome, btnriwayat, btnprofil;
 
     JasaDAO jasaDAO;
     KategoriDAO kategoriDAO;
     SatuanDAO satuanDAO;
-
     JasaAdapter jasaAdapter;
+
     List<Kategori> kategoriList = new ArrayList<>();
     int selectedKategoriId = -1;
+    int currentTab = 2; // default: Jasa
 
-    // Tab: 1=Kategori, 2=Jasa, 3=Satuan
-    int currentTab = 2;
+    // Warna tab
+    private static final int COLOR_ACTIVE_BG   = 0xFF161E54;
+    private static final int COLOR_ACTIVE_TEXT  = 0xFFFFFFFF;
+    private static final int COLOR_INACTIVE_BG  = 0xFFEEEEEE;
+    private static final int COLOR_INACTIVE_TEXT = 0xFF161E54;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.kelolajasa);
 
-        jasaDAO = new JasaDAO(this);
+        jasaDAO     = new JasaDAO(this);
         kategoriDAO = new KategoriDAO(this);
-        satuanDAO = new SatuanDAO(this);
+        satuanDAO   = new SatuanDAO(this);
 
         initViews();
         setupBottomNav();
         setupTabs();
         loadKategoriSpinner();
-        switchToTab(2); // default: Jasa
+        switchToTab(2);
         setupSearch();
     }
 
     private void initViews() {
-        title = findViewById(R.id.title);
-        tambahjasa = findViewById(R.id.tambahjasa);
-        labelKategori = findViewById(R.id.labelKategori);
-        labelNama = findViewById(R.id.labelNama);
-        editTextText3 = findViewById(R.id.editTextText3);
-        inputNama = findViewById(R.id.inputNama);
+        title           = findViewById(R.id.title);
+        tambahjasa      = findViewById(R.id.tambahjasa);
+        labelKategori   = findViewById(R.id.labelKategori);
+        labelNama       = findViewById(R.id.labelNama);
+        editTextText3   = findViewById(R.id.editTextText3);
+        inputNama       = findViewById(R.id.inputNama);
         spinnerKategori = findViewById(R.id.spinnerKategori);
-        btnSimpan = findViewById(R.id.btnSimpan);
-        txtEmpty = findViewById(R.id.txtEmpty);
-        recyclerView = findViewById(R.id.recyclerView);
+        btnSimpan       = findViewById(R.id.btnSimpan);
+        txtEmpty        = findViewById(R.id.txtEmpty);
+        recyclerView    = findViewById(R.id.recyclerView);
         btn1 = findViewById(R.id.btn1);
         btn2 = findViewById(R.id.btn2);
         btn3 = findViewById(R.id.btn3);
 
-        btncari = findViewById(R.id.btncari);
-        btnbag = findViewById(R.id.btnbag);
-        btnhome = findViewById(R.id.btnhome);
+        btncari    = findViewById(R.id.btncari);
+        btnbag     = findViewById(R.id.btnbag);
+        btnhome    = findViewById(R.id.btnhome);
         btnriwayat = findViewById(R.id.btnriwayat);
-        btnprofil = findViewById(R.id.btnprofil);
+        btnprofil  = findViewById(R.id.btnprofil);
 
-        // title has drawableStart=icon_back → click = finish()
-        title.setOnClickListener(v -> finish());
+        if (title != null) title.setOnClickListener(v -> finish());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setNestedScrollingEnabled(false);
 
-        spinnerKategori.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View v, int pos, long id) {
-                if (pos < kategoriList.size()) {
-                    selectedKategoriId = kategoriList.get(pos).getIdKategori();
+        if (spinnerKategori != null) {
+            spinnerKategori.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> p, View v, int pos, long id) {
+                    if (pos < kategoriList.size())
+                        selectedKategoriId = kategoriList.get(pos).getIdKategori();
                 }
-            }
-            @Override public void onNothingSelected(AdapterView<?> parent) {}
-        });
+                @Override public void onNothingSelected(AdapterView<?> p) {}
+            });
+        }
 
-        btnSimpan.setOnClickListener(v -> prosesSimp());
+        if (btnSimpan != null) btnSimpan.setOnClickListener(v -> prosesSimp());
     }
 
-    private void setupBottomNav() {
-        if (btncari != null) btncari.setOnClickListener(v ->
-                startActivity(new Intent(this, KelolaPenggunaActivity.class)));
-        if (btnbag != null) btnbag.setOnClickListener(v ->
-                Toast.makeText(this, "Kelola Jasa", Toast.LENGTH_SHORT).show());
-        if (btnhome != null) btnhome.setOnClickListener(v ->
-                startActivity(new Intent(this, AdminDashboardActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)));
-        if (btnriwayat != null) btnriwayat.setOnClickListener(v ->
-                startActivity(new Intent(this, KelolaBookingActivity.class)));
-        if (btnprofil != null) btnprofil.setOnClickListener(v ->
-                startActivity(new Intent(this, KelolaPengajuanActivity.class)));
+    // ── TAB HIGHLIGHT ──────────────────────────────────────────
+    private void setTabActive(MaterialButton btn, boolean active) {
+        if (btn == null) return;
+        btn.setBackgroundTintList(ColorStateList.valueOf(
+                active ? COLOR_ACTIVE_BG : COLOR_INACTIVE_BG));
+        btn.setTextColor(active ? COLOR_ACTIVE_TEXT : COLOR_INACTIVE_TEXT);
     }
 
     private void setupTabs() {
-        btn1.setOnClickListener(v -> switchToTab(1));
-        btn2.setOnClickListener(v -> switchToTab(2));
-        btn3.setOnClickListener(v -> switchToTab(3));
+        if (btn1 != null) btn1.setOnClickListener(v -> switchToTab(1));
+        if (btn2 != null) btn2.setOnClickListener(v -> switchToTab(2));
+        if (btn3 != null) btn3.setOnClickListener(v -> switchToTab(3));
     }
 
     private void switchToTab(int tab) {
         currentTab = tab;
-        inputNama.setText("");
-        inputNama.setError(null);
+        if (inputNama != null) { inputNama.setText(""); inputNama.setError(null); }
 
-        // Tab styling
-        int activeColor = getResources().getColor(android.R.color.white, null);
-        int inactiveColor = getResources().getColor(android.R.color.darker_gray, null);
-        btn1.setTextColor(tab == 1 ? activeColor : inactiveColor);
-        btn2.setTextColor(tab == 2 ? activeColor : inactiveColor);
-        btn3.setTextColor(tab == 3 ? activeColor : inactiveColor);
+        setTabActive(btn1, tab == 1);
+        setTabActive(btn2, tab == 2);
+        setTabActive(btn3, tab == 3);
 
         switch (tab) {
             case 1: // Kategori
-                tambahjasa.setText("Tambah Kategori");
-                labelNama.setText("Nama Kategori");
+                if (tambahjasa != null) tambahjasa.setText("Tambah Kategori");
+                if (labelNama != null) labelNama.setText("Nama Kategori");
                 if (labelKategori != null) labelKategori.setVisibility(View.GONE);
-                spinnerKategori.setVisibility(View.GONE);
-                inputNama.setHint("Masukkan nama kategori...");
+                if (spinnerKategori != null) spinnerKategori.setVisibility(View.GONE);
+                if (inputNama != null) inputNama.setHint("Masukkan nama kategori...");
                 loadKategoriList();
                 break;
             case 2: // Jasa
-                tambahjasa.setText("Tambah Jasa");
-                labelNama.setText("Nama Jasa");
+                if (tambahjasa != null) tambahjasa.setText("Tambah Jasa");
+                if (labelNama != null) labelNama.setText("Nama Jasa");
                 if (labelKategori != null) labelKategori.setVisibility(View.VISIBLE);
-                spinnerKategori.setVisibility(View.VISIBLE);
-                inputNama.setHint("Masukkan Nama Jasa di sini..");
+                if (spinnerKategori != null) spinnerKategori.setVisibility(View.VISIBLE);
+                if (inputNama != null) inputNama.setHint("Masukkan Nama Jasa di sini..");
                 loadJasaList();
                 break;
             case 3: // Satuan
-                tambahjasa.setText("Tambah Satuan");
-                labelNama.setText("Nama Satuan");
+                if (tambahjasa != null) tambahjasa.setText("Tambah Satuan");
+                if (labelNama != null) labelNama.setText("Nama Satuan");
                 if (labelKategori != null) labelKategori.setVisibility(View.GONE);
-                spinnerKategori.setVisibility(View.GONE);
-                inputNama.setHint("Masukkan nama satuan (misal: Projek, Jam)...");
+                if (spinnerKategori != null) spinnerKategori.setVisibility(View.GONE);
+                if (inputNama != null) inputNama.setHint("Masukkan nama satuan (misal: Jam, Project)...");
                 loadSatuanList();
                 break;
         }
@@ -177,31 +170,28 @@ public class KelolaJasaActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, namaList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerKategori.setAdapter(adapter);
-        if (!kategoriList.isEmpty()) selectedKategoriId = kategoriList.get(0).getIdKategori();
+        if (spinnerKategori != null) {
+            spinnerKategori.setAdapter(adapter);
+            if (!kategoriList.isEmpty()) selectedKategoriId = kategoriList.get(0).getIdKategori();
+        }
     }
 
     private void loadJasaList() {
         List<Jasa> list = jasaDAO.getAllWithKategori();
         showEmptyOrList(list.isEmpty());
         jasaAdapter = new JasaAdapter(list,
-                jasa -> showHapusDialog("Hapus jasa \"" + jasa.getNamaJasa() + "\"?",
-                        () -> {
-                            int r = jasaDAO.delete(jasa.getIdJasa());
-                            if (r == -2) Toast.makeText(this, "Jasa masih dipakai layanan!", Toast.LENGTH_SHORT).show();
-                            else loadJasaList();
-                        }),
+                jasa -> showHapusDialog("Hapus jasa \"" + jasa.getNamaJasa() + "\"?", () -> {
+                    int r = jasaDAO.delete(jasa.getIdJasa());
+                    if (r == -2) Toast.makeText(this, "Jasa masih dipakai layanan!", Toast.LENGTH_SHORT).show();
+                    else loadJasaList();
+                }),
                 jasa -> {
-                    inputNama.setText(jasa.getNamaJasa());
-                    // Highlight for edit — in a full implementation, store edit ID
-                    Toast.makeText(this, "Edit belum tersedia, hapus dan tambah baru.", Toast.LENGTH_SHORT).show();
+                    if (inputNama != null) inputNama.setText(jasa.getNamaJasa());
                 });
         recyclerView.setAdapter(jasaAdapter);
     }
 
     private void loadKategoriList() {
-        // Reuse JasaAdapter structure: display kategori in same table
-        // We'll show kategori as "nama" + "-" for kategori column
         List<Jasa> fakeList = new ArrayList<>();
         for (Kategori k : kategoriDAO.getAll()) {
             Jasa fake = new Jasa(k.getIdKategori(), 0, k.getNamaKategori());
@@ -210,13 +200,12 @@ public class KelolaJasaActivity extends AppCompatActivity {
         }
         showEmptyOrList(fakeList.isEmpty());
         JasaAdapter adapter = new JasaAdapter(fakeList,
-                jasa -> showHapusDialog("Hapus kategori \"" + jasa.getNamaJasa() + "\"?",
-                        () -> {
-                            int r = kategoriDAO.delete(jasa.getIdJasa());
-                            if (r == -2) Toast.makeText(this, "Kategori masih dipakai jasa!", Toast.LENGTH_SHORT).show();
-                            else { loadKategoriSpinner(); loadKategoriList(); }
-                        }),
-                jasa -> inputNama.setText(jasa.getNamaJasa()));
+                jasa -> showHapusDialog("Hapus kategori \"" + jasa.getNamaJasa() + "\"?", () -> {
+                    int r = kategoriDAO.delete(jasa.getIdJasa());
+                    if (r == -2) Toast.makeText(this, "Kategori masih dipakai jasa!", Toast.LENGTH_SHORT).show();
+                    else { loadKategoriSpinner(); loadKategoriList(); }
+                }),
+                jasa -> { if (inputNama != null) inputNama.setText(jasa.getNamaJasa()); });
         recyclerView.setAdapter(adapter);
     }
 
@@ -229,17 +218,17 @@ public class KelolaJasaActivity extends AppCompatActivity {
         }
         showEmptyOrList(fakeList.isEmpty());
         JasaAdapter adapter = new JasaAdapter(fakeList,
-                jasa -> showHapusDialog("Hapus satuan \"" + jasa.getNamaJasa() + "\"?",
-                        () -> {
-                            int r = satuanDAO.delete(jasa.getIdJasa());
-                            if (r == -2) Toast.makeText(this, "Satuan masih dipakai layanan!", Toast.LENGTH_SHORT).show();
-                            else loadSatuanList();
-                        }),
-                jasa -> inputNama.setText(jasa.getNamaJasa()));
+                jasa -> showHapusDialog("Hapus satuan \"" + jasa.getNamaJasa() + "\"?", () -> {
+                    int r = satuanDAO.delete(jasa.getIdJasa());
+                    if (r == -2) Toast.makeText(this, "Satuan masih dipakai layanan!", Toast.LENGTH_SHORT).show();
+                    else loadSatuanList();
+                }),
+                jasa -> { if (inputNama != null) inputNama.setText(jasa.getNamaJasa()); });
         recyclerView.setAdapter(adapter);
     }
 
     private void prosesSimp() {
+        if (inputNama == null) return;
         String nama = inputNama.getText().toString().trim();
         if (TextUtils.isEmpty(nama)) {
             inputNama.setError("Nama tidak boleh kosong");
@@ -288,9 +277,11 @@ public class KelolaJasaActivity extends AppCompatActivity {
         editTextText3.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int st, int c, int a) {}
             @Override public void onTextChanged(CharSequence s, int st, int b, int c) {
-                if (jasaAdapter != null) jasaAdapter.setData(
-                        s.toString().isEmpty() ? jasaDAO.getAllWithKategori()
-                                : jasaDAO.searchWithKategori(s.toString()));
+                if (currentTab == 2 && jasaAdapter != null) {
+                    jasaAdapter.setData(s.toString().isEmpty()
+                            ? jasaDAO.getAllWithKategori()
+                            : jasaDAO.searchWithKategori(s.toString()));
+                }
             }
             @Override public void afterTextChanged(Editable s) {}
         });
@@ -302,11 +293,23 @@ public class KelolaJasaActivity extends AppCompatActivity {
 
     private void showHapusDialog(String pesan, Runnable onConfirm) {
         new AlertDialog.Builder(this)
-                .setTitle("Konfirmasi Hapus")
-                .setMessage(pesan)
+                .setTitle("Konfirmasi Hapus").setMessage(pesan)
                 .setPositiveButton("Hapus", (d, w) -> onConfirm.run())
-                .setNegativeButton("Batal", null)
-                .show();
+                .setNegativeButton("Batal", null).show();
+    }
+
+    private void setupBottomNav() {
+        if (btncari != null) btncari.setOnClickListener(v ->
+                startActivity(new Intent(this, KelolaPenggunaActivity.class)));
+        if (btnbag != null) btnbag.setOnClickListener(v ->
+                Toast.makeText(this, "Kelola Jasa", Toast.LENGTH_SHORT).show());
+        if (btnhome != null) btnhome.setOnClickListener(v ->
+                startActivity(new Intent(this, AdminDashboardActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)));
+        if (btnriwayat != null) btnriwayat.setOnClickListener(v ->
+                startActivity(new Intent(this, KelolaBookingActivity.class)));
+        if (btnprofil != null) btnprofil.setOnClickListener(v ->
+                startActivity(new Intent(this, KelolaPengajuanActivity.class)));
     }
 
     @Override

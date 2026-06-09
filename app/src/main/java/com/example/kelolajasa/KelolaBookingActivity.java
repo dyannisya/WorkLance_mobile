@@ -1,6 +1,7 @@
 package com.example.kelolajasa;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -33,6 +34,12 @@ public class KelolaBookingActivity extends AppCompatActivity {
 
     BookingDAO bookingDAO;
     BookingFullAdapter adapter;
+    String currentStatusFilter = "Semua";
+
+    private static final int COLOR_ACTIVE_BG    = 0xFF161E54;
+    private static final int COLOR_ACTIVE_TEXT   = 0xFFFFFFFF;
+    private static final int COLOR_INACTIVE_BG   = 0xFFEEEEEE;
+    private static final int COLOR_INACTIVE_TEXT = 0xFF161E54;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,27 +55,112 @@ public class KelolaBookingActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        title = findViewById(R.id.title);
-        txtEmpty = findViewById(R.id.txtEmpty);
-        tvCountMenunggu = findViewById(R.id.tvCountMenunggu);
-        tvCountDiproses = findViewById(R.id.tvCountDiproses);
-        tvCountSelesai = findViewById(R.id.tvCountSelesai);
-        tvCountDibatalkan = findViewById(R.id.tvCountDibatalkan);
-        editText1 = findViewById(R.id.editText1);
+        title              = findViewById(R.id.title);
+        txtEmpty           = findViewById(R.id.txtEmpty);
+        tvCountMenunggu    = findViewById(R.id.tvCountMenunggu);
+        tvCountDiproses    = findViewById(R.id.tvCountDiproses);
+        tvCountSelesai     = findViewById(R.id.tvCountSelesai);
+        tvCountDibatalkan  = findViewById(R.id.tvCountDibatalkan);
+        editText1          = findViewById(R.id.editText1);
         btn1 = findViewById(R.id.btn1); // Semua
         btn2 = findViewById(R.id.btn2); // Menunggu
         btn3 = findViewById(R.id.btn3); // Diproses
         btn4 = findViewById(R.id.btn4); // Selesai
         btn5 = findViewById(R.id.btn5); // Dibatalkan
-        recyclerView = findViewById(R.id.recyclerView);
-        btncari = findViewById(R.id.btncari);
-        btnbag = findViewById(R.id.btnbag);
-        btnhome = findViewById(R.id.btnhome);
+        recyclerView       = findViewById(R.id.recyclerView);
+        btncari    = findViewById(R.id.btncari);
+        btnbag     = findViewById(R.id.btnbag);
+        btnhome    = findViewById(R.id.btnhome);
         btnriwayat = findViewById(R.id.btnriwayat);
-        btnprofil = findViewById(R.id.btnprofil);
+        btnprofil  = findViewById(R.id.btnprofil);
 
         if (title != null) title.setOnClickListener(v -> finish());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void setTabActive(MaterialButton btn, boolean active) {
+        if (btn == null) return;
+        btn.setBackgroundTintList(ColorStateList.valueOf(
+                active ? COLOR_ACTIVE_BG : COLOR_INACTIVE_BG));
+        btn.setTextColor(active ? COLOR_ACTIVE_TEXT : COLOR_INACTIVE_TEXT);
+    }
+
+    private void applyStatusFilter(String status) {
+        currentStatusFilter = status;
+        setTabActive(btn1, "Semua".equals(status));
+        setTabActive(btn2, "Menunggu".equals(status));
+        setTabActive(btn3, "Diproses".equals(status));
+        setTabActive(btn4, "Selesai".equals(status));
+        setTabActive(btn5, "Dibatalkan".equals(status));
+        if (adapter != null) adapter.filterByStatus(status);
+    }
+
+    private void setupFilterTabs() {
+        if (btn1 != null) btn1.setOnClickListener(v -> applyStatusFilter("Semua"));
+        if (btn2 != null) btn2.setOnClickListener(v -> applyStatusFilter("Menunggu"));
+        if (btn3 != null) btn3.setOnClickListener(v -> applyStatusFilter("Diproses"));
+        if (btn4 != null) btn4.setOnClickListener(v -> applyStatusFilter("Selesai"));
+        if (btn5 != null) btn5.setOnClickListener(v -> applyStatusFilter("Dibatalkan"));
+        // Default "Semua" aktif
+        applyStatusFilter("Semua");
+    }
+
+    private void setupSearch() {
+        if (editText1 == null) return;
+        editText1.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int st, int c, int a) {}
+            @Override public void onTextChanged(CharSequence s, int st, int b, int c) {
+                if (adapter != null) adapter.filterByKeyword(s.toString());
+            }
+            @Override public void afterTextChanged(Editable s) {}
+        });
+    }
+
+    private void loadData() {
+        safeSetText(tvCountMenunggu,
+                String.valueOf(bookingDAO.countByStatus(BookingDAO.STATUS_MENUNGGU)));
+        safeSetText(tvCountDiproses,
+                String.valueOf(bookingDAO.countByStatus(BookingDAO.STATUS_DIPROSES)));
+        safeSetText(tvCountSelesai,
+                String.valueOf(bookingDAO.countByStatus(BookingDAO.STATUS_SELESAI)));
+        safeSetText(tvCountDibatalkan,
+                String.valueOf(bookingDAO.countByStatus("Dibatalkan")));
+
+        List<BookingDisplay> list = bookingDAO.getRecentWithDetails(200);
+        boolean isEmpty = list == null || list.isEmpty();
+        if (txtEmpty != null) txtEmpty.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+
+        adapter = new BookingFullAdapter(list, item -> showUbahStatusDialog(item));
+        recyclerView.setAdapter(adapter);
+        applyStatusFilter(currentStatusFilter);
+    }
+
+    private void showUbahStatusDialog(BookingDisplay item) {
+        String[] options = { "Menunggu", "Diproses", "Selesai", "Dibatalkan" };
+        int currentPos = 0;
+        for (int i = 0; i < options.length; i++) {
+            if (options[i].equals(item.getStatusBooking())) { currentPos = i; break; }
+        }
+        final int[] selected = { currentPos };
+
+        new AlertDialog.Builder(this)
+                .setTitle("Ubah Status #" + item.getIdBooking())
+                .setMessage("Client: " + item.getNamaClient()
+                        + "\nLayanan: " + item.getNamaJasa()
+                        + "\nStatus saat ini: " + item.getStatusBooking())
+                .setSingleChoiceItems(options, currentPos, (d, w) -> selected[0] = w)
+                .setPositiveButton("Simpan", (d, w) -> {
+                    String statusBaru = options[selected[0]];
+                    if (bookingDAO.updateStatus(item.getIdBooking(), statusBaru) > 0) {
+                        Toast.makeText(this, "Status → " + statusBaru, Toast.LENGTH_SHORT).show();
+                        loadData();
+                    }
+                })
+                .setNegativeButton("Batal", null).show();
+    }
+
+    private void safeSetText(TextView tv, String val) {
+        if (tv != null) tv.setText(val);
     }
 
     private void setupBottomNav() {
@@ -85,96 +177,8 @@ public class KelolaBookingActivity extends AppCompatActivity {
                 startActivity(new Intent(this, KelolaPengajuanActivity.class)));
     }
 
-    private void setupFilterTabs() {
-        btn1.setOnClickListener(v -> { if (adapter != null) adapter.filterByStatus("Semua"); });
-        btn2.setOnClickListener(v -> { if (adapter != null) adapter.filterByStatus("Menunggu"); });
-        btn3.setOnClickListener(v -> { if (adapter != null) adapter.filterByStatus("Diproses"); });
-        btn4.setOnClickListener(v -> { if (adapter != null) adapter.filterByStatus("Selesai"); });
-        btn5.setOnClickListener(v -> { if (adapter != null) adapter.filterByStatus("Dibatalkan"); });
-    }
-
-    private void setupSearch() {
-        if (editText1 == null) return;
-        editText1.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int st, int c, int a) {}
-            @Override public void onTextChanged(CharSequence s, int start, int b, int c) {
-                if (adapter != null) adapter.filterByKeyword(s.toString());
-            }
-            @Override public void afterTextChanged(Editable s) {}
-        });
-    }
-
-    private void loadData() {
-        // Update stat cards
-        safeSetText(tvCountMenunggu,
-                String.valueOf(bookingDAO.countByStatus(BookingDAO.STATUS_MENUNGGU)));
-        safeSetText(tvCountDiproses,
-                String.valueOf(bookingDAO.countByStatus(BookingDAO.STATUS_DIPROSES)));
-        safeSetText(tvCountSelesai,
-                String.valueOf(bookingDAO.countByStatus(BookingDAO.STATUS_SELESAI)));
-        safeSetText(tvCountDibatalkan,
-                String.valueOf(bookingDAO.countByStatus("Dibatalkan")));
-
-        List<BookingDisplay> list = bookingDAO.getRecentWithDetails(200);
-        boolean isEmpty = list == null || list.isEmpty();
-        if (txtEmpty != null) txtEmpty.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
-
-        adapter = new BookingFullAdapter(list, item -> showUbahStatusDialog(item));
-        recyclerView.setAdapter(adapter);
-    }
-
-    private void showUbahStatusDialog(BookingDisplay item) {
-        String[] statusOptions = {
-                BookingDAO.STATUS_MENUNGGU,
-                BookingDAO.STATUS_DIPROSES,
-                BookingDAO.STATUS_SELESAI,
-                "Dibatalkan"
-        };
-
-        // Tentukan posisi status saat ini
-        int currentPos = 0;
-        for (int i = 0; i < statusOptions.length; i++) {
-            if (statusOptions[i].equals(item.getStatusBooking())) {
-                currentPos = i;
-                break;
-            }
-        }
-        final int[] selected = { currentPos };
-
-        new AlertDialog.Builder(this)
-                .setTitle("Ubah Status Booking #" + item.getIdBooking())
-                .setMessage("Client: " + item.getNamaClient() +
-                        "\nLayanan: " + item.getNamaJasa() +
-                        "\nStatus saat ini: " + item.getStatusBooking())
-                .setSingleChoiceItems(statusOptions, currentPos,
-                        (d, which) -> selected[0] = which)
-                .setPositiveButton("Simpan", (d, w) -> {
-                    String statusBaru = statusOptions[selected[0]];
-                    int r = bookingDAO.updateStatus(item.getIdBooking(), statusBaru);
-                    if (r > 0) {
-                        Toast.makeText(this,
-                                "Status diubah ke: " + statusBaru, Toast.LENGTH_SHORT).show();
-                        loadData();
-                    } else {
-                        Toast.makeText(this, "Gagal mengubah status", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton("Batal", null)
-                .show();
-    }
-
-    private void safeSetText(TextView tv, String val) {
-        if (tv != null) tv.setText(val);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadData();
-    }
-
-    @Override
-    protected void onDestroy() {
+    @Override protected void onResume() { super.onResume(); loadData(); }
+    @Override protected void onDestroy() {
         super.onDestroy();
         if (bookingDAO != null) bookingDAO.close();
     }
