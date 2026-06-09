@@ -3,6 +3,7 @@ package com.example.kelolajasa;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,7 +14,11 @@ public class ProfilActivity extends AppCompatActivity {
 
     // Deklarasi View
     TextView tvNama, tvEmail, tvLocation;
-    CardView menuGroup1, menuGroup2, menuGroup3;
+    CardView menuGroup2, menuGroup3;
+
+    // Tambahkan deklarasi untuk tombol menu profil
+    LinearLayout btnEditProfil, btnKontakAlamat, btnKeamanan;
+
     ImageView btncari, btnbag, btnhome, btnriwayat, btnprofil;
 
     // Deklarasi SessionManager
@@ -22,30 +27,36 @@ public class ProfilActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profil); // Pastikan sesuai nama file XML profil kamu
+        setContentView(R.layout.profil);
 
-        // Inisialisasi SessionManager
         sessionManager = new SessionManager(this);
 
-        // Jika user belum login, lempar kembali ke halaman Login (Keamanan tambahan)
         if (!sessionManager.isLoggedIn()) {
             goToLogin();
             return;
         }
 
-        // Inisialisasi tampilan, data, dan navigasi
         initViews();
-        loadProfileData();
         setupBottomNav();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Fungsi ini akan selalu dijalankan setiap kali user kembali ke halaman ini
+        loadProfileData();
+    }
+
     private void initViews() {
-        // Hubungkan variabel dengan ID di XML
         tvNama = findViewById(R.id.tvNama);
         tvEmail = findViewById(R.id.tvEmail);
         tvLocation = findViewById(R.id.tvLocation);
 
-        menuGroup1 = findViewById(R.id.menuGroup1);
+        // Inisialisasi ID menu baru
+        btnEditProfil = findViewById(R.id.btnEditProfil);
+        btnKontakAlamat = findViewById(R.id.btnKontakAlamat);
+        btnKeamanan = findViewById(R.id.btnKeamanan);
+
         menuGroup2 = findViewById(R.id.menuGroup2);
         menuGroup3 = findViewById(R.id.menuGroup3);
 
@@ -55,43 +66,63 @@ public class ProfilActivity extends AppCompatActivity {
         btnriwayat = findViewById(R.id.btnriwayat);
         btnprofil = findViewById(R.id.btnprofil);
 
-        // Aksi klik untuk MenuGroup1 (Contoh: Edit Profil)
-        if (menuGroup1 != null) {
-            menuGroup1.setOnClickListener(v -> {
-                Toast.makeText(this, "Menu Pengaturan Profil", Toast.LENGTH_SHORT).show();
+        // Aksi klik untuk Edit Profil
+        if (btnEditProfil != null) {
+            btnEditProfil.setOnClickListener(v -> {
+                startActivity(new Intent(this, ProfilInformasiAkunActivity.class));
+            });
+        }
+
+        // Aksi klik untuk Kontak & Alamat
+        if (btnKontakAlamat != null) {
+            btnKontakAlamat.setOnClickListener(v -> {
+                startActivity(new Intent(this, ProfilKontakAlamatActivity.class));
+            });
+        }
+
+        // Aksi klik untuk Keamanan
+        if (btnKeamanan != null) {
+            btnKeamanan.setOnClickListener(v -> {
+                startActivity(new Intent(this, ProfilKeamananActivity.class));
             });
         }
 
         // Aksi klik untuk MenuGroup3 (Keluar / Logout)
         if (menuGroup3 != null) {
             menuGroup3.setOnClickListener(v -> {
-                // Hapus data sesi
                 sessionManager.logout();
                 Toast.makeText(this, "Berhasil Keluar", Toast.LENGTH_SHORT).show();
-
-                // Arahkan ke halaman login
                 goToLogin();
             });
         }
     }
 
     private void loadProfileData() {
-        // Mengambil data dinamis dari SessionManager
-        String namaPengguna = sessionManager.getNamaPengguna();
-        String emailPengguna = sessionManager.getEmail();
+        // Ambil data langsung dari Database berdasarkan ID yang sedang login
+        com.example.kelolajasa.database.PenggunaDAO penggunaDAO = new com.example.kelolajasa.database.PenggunaDAO(this);
+        com.example.kelolajasa.model.Pengguna pengguna = penggunaDAO.getPenggunaById(sessionManager.getIdPengguna());
 
-        // Tampilkan ke TextView
-        if (tvNama != null) tvNama.setText(namaPengguna.isEmpty() ? "Nama Tidak Tersedia" : namaPengguna);
-        if (tvEmail != null) tvEmail.setText(emailPengguna.isEmpty() ? "Email Tidak Tersedia" : emailPengguna);
+        if (pengguna != null) {
+            // Tampilkan data asli dari database ke layar
+            if (tvNama != null) tvNama.setText(pengguna.getNamaPengguna());
+            if (tvEmail != null) tvEmail.setText(pengguna.getEmail());
 
-        // Lokasi statis karena belum ada di SessionManager (Bisa diubah jika nanti ditambahkan ke DB)
-        if (tvLocation != null) tvLocation.setText("Sidoarjo");
+            // Menampilkan alamat lengkap di text lokasi jika ada
+            if (tvLocation != null) {
+                String alamat = pengguna.getAlamatLengkap();
+                tvLocation.setText(alamat == null || alamat.isEmpty() ? "Belum diatur" : alamat);
+            }
+        } else {
+            // Jika gagal load DB, gunakan session sebagai backup
+            if (tvNama != null) tvNama.setText(sessionManager.getNamaPengguna());
+            if (tvEmail != null) tvEmail.setText(sessionManager.getEmail());
+        }
+
+        penggunaDAO.close(); // Selalu tutup DAO setelah digunakan
     }
 
     private void goToLogin() {
-        // Ganti "LoginActivity.class" dengan nama activity login kamu yang sebenarnya
         Intent intent = new Intent(ProfilActivity.this, MasukAkunActivity.class);
-        // Membersihkan riwayat halaman sebelumnya agar tidak bisa di-back setelah logout
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();

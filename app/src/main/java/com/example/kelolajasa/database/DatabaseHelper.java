@@ -8,7 +8,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "worklance.db";
     // Bump ke 4 → paksa onUpgrade rebuild + seed ulang data dummy
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -35,8 +35,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_PENGGUNA =
             "CREATE TABLE pengguna (id_pengguna INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "id_role INTEGER, username TEXT, nama_pengguna TEXT, tanggal_lahir TEXT, " +
-                    "no_telp TEXT, email TEXT, password TEXT, id_provinsi INTEGER, " +
-                    "id_kabupaten INTEGER, id_kecamatan INTEGER, id_desa INTEGER, " +
+                    "no_telp TEXT, email TEXT, password TEXT, id_provinsi TEXT, " +
+                    "id_kabupaten TEXT, id_kecamatan TEXT, id_desa TEXT, " +
                     "alamat_lengkap TEXT, foto_profil TEXT);";
 
     private static final String CREATE_PENGAJUAN =
@@ -171,21 +171,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // ===== PENGGUNA =====
         // Admin — login: admin@worklance.com / admin123
         db.execSQL("INSERT INTO pengguna VALUES (1,1,'admin','Administrator',''," +
-                "'081234567890','admin@worklance.com','admin123',0,0,0,0,'','')");
+                "'081234567890','admin@worklance.com','admin123','','','',''," +
+                "'','')");
 
         // User/Klien — login: user@worklance.com / user123
         db.execSQL("INSERT INTO pengguna VALUES (2,2,'budi_user','Budi Santoso'," +
-                "'1998-05-12','081299887766','user@worklance.com','user123',1,1,1,1," +
+                "'1998-05-12','081299887766','user@worklance.com','user123'," +
+                "'Jawa Timur','Surabaya','Sukolilo','Keputih'," +
                 "'Jl. Keputih No 10','')");
 
         // Freelancer — login: freelancer@worklance.com / freelance123
         db.execSQL("INSERT INTO pengguna VALUES (3,3,'joko_free','Joko Handoko'," +
-                "'1995-08-20','081555444333','freelancer@worklance.com','freelance123',1,1,2,3," +
+                "'1995-08-20','081555444333','freelancer@worklance.com','freelance123'," +
+                "'Jawa Timur','Surabaya','Rungkut','Rungkut Tengah'," +
                 "'Jl. Rungkut Tengah No 5','')");
 
         // Freelancer ke-2 — login: sari@worklance.com / sari123
         db.execSQL("INSERT INTO pengguna VALUES (4,3,'sari_design','Sari Dewi'," +
-                "'1997-03-15','081677889900','sari@worklance.com','sari123',1,1,1,2," +
+                "'1997-03-15','081677889900','sari@worklance.com','sari123'," +
+                "'Jawa Timur','Surabaya','Sukolilo','Gebang Putih'," +
                 "'Jl. Gebang Putih No 7','')");
 
         // ===== KATEGORI =====

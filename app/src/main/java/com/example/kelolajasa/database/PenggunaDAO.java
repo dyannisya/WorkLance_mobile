@@ -31,16 +31,17 @@ public class PenggunaDAO {
         if (isUsernameTerdaftar(username)) return -3; // -3 = username duplikat
 
         ContentValues cv = new ContentValues();
-        cv.put("id_role", 2); // default: User
+        cv.put("id_role", 2);
         cv.put("username", username.trim());
-        cv.put("nama_pengguna", username.trim()); // nama awal = username
+        cv.put("nama_pengguna", username.trim());
         cv.put("email", email.trim().toLowerCase());
         cv.put("no_telp", noTelp.trim());
         cv.put("password", password);
-        cv.put("id_provinsi", 0);
-        cv.put("id_kabupaten", 0);
-        cv.put("id_kecamatan", 0);
-        cv.put("id_desa", 0);
+        cv.put("id_provinsi", "");
+        cv.put("id_kabupaten", "");
+        cv.put("id_kecamatan", "");
+        cv.put("id_desa", "");
+
         cv.put("alamat_lengkap", "");
         cv.put("foto_profil", "");
         cv.put("tanggal_lahir", "");
@@ -107,21 +108,45 @@ public class PenggunaDAO {
     }
 
     /**
+     * Mengambil daftar pengguna yang terdaftar sebagai Freelancer (id_role = 3)
+     */
+    public List<Pengguna> getFreelancerUnggulan() {
+        List<Pengguna> list = new ArrayList<>();
+        Cursor c = null;
+        try {
+            // Mengambil data user yang role-nya 3 (Freelancer), dibatasi 5 orang agar dashboard tidak terlalu berat
+            c = db.rawQuery("SELECT * FROM pengguna WHERE id_role = 3 ORDER BY id_pengguna DESC LIMIT 5", null);
+            if (c != null && c.moveToFirst()) {
+                do {
+                    list.add(cursorToPengguna(c));
+                } while (c.moveToNext());
+            }
+        } finally {
+            if (c != null) c.close();
+        }
+        return list;
+    }
+
+    /**
+     * Update profil pengguna.
+     * @return jumlah baris yang diupdate
+     */
+    /**
      * Update profil pengguna.
      * @return jumlah baris yang diupdate
      */
     public int updateProfil(int idPengguna, String namaPengguna,
                             String noTelp, String tanggalLahir,
-                            int idProvinsi, int idKabupaten, int idKecamatan,
-                            int idDesa, String alamatLengkap) {
+                            String idProvinsi, String idKabupaten, String idKecamatan, // UBAH DARI int KE String
+                            String idDesa, String alamatLengkap) {                     // UBAH DARI int KE String
         ContentValues cv = new ContentValues();
         cv.put("nama_pengguna", namaPengguna);
         cv.put("no_telp", noTelp);
         cv.put("tanggal_lahir", tanggalLahir);
-        cv.put("id_provinsi", idProvinsi);
-        cv.put("id_kabupaten", idKabupaten);
-        cv.put("id_kecamatan", idKecamatan);
-        cv.put("id_desa", idDesa);
+        cv.put("id_provinsi", idProvinsi); // Simpan teks
+        cv.put("id_kabupaten", idKabupaten); // Simpan teks
+        cv.put("id_kecamatan", idKecamatan); // Simpan teks
+        cv.put("id_desa", idDesa); // Simpan teks
         cv.put("alamat_lengkap", alamatLengkap);
         return db.update("pengguna", cv, "id_pengguna = ?",
                 new String[]{ String.valueOf(idPengguna) });
@@ -183,13 +208,64 @@ public class PenggunaDAO {
                 c.getString(c.getColumnIndexOrThrow("no_telp")),
                 c.getString(c.getColumnIndexOrThrow("email")),
                 c.getString(c.getColumnIndexOrThrow("password")),
-                c.getInt(c.getColumnIndexOrThrow("id_provinsi")),
-                c.getInt(c.getColumnIndexOrThrow("id_kabupaten")),
-                c.getInt(c.getColumnIndexOrThrow("id_kecamatan")),
-                c.getInt(c.getColumnIndexOrThrow("id_desa")),
+                c.getString(c.getColumnIndexOrThrow("id_provinsi")),
+                c.getString(c.getColumnIndexOrThrow("id_kabupaten")),
+                c.getString(c.getColumnIndexOrThrow("id_kecamatan")),
+                c.getString(c.getColumnIndexOrThrow("id_desa")),
                 c.getString(c.getColumnIndexOrThrow("alamat_lengkap")),
                 c.getString(c.getColumnIndexOrThrow("foto_profil"))
         );
+    }
+
+    /**
+     * Update Informasi Akun (Username, Nama Lengkap, Tanggal Lahir)
+     * @return true jika berhasil, false jika gagal
+     */
+    public boolean updateInformasiAkun(int idPengguna, String username, String namaLengkap, String tanggalLahir) {
+        android.content.ContentValues cv = new android.content.ContentValues();
+        cv.put("username", username.trim());
+        cv.put("nama_pengguna", namaLengkap.trim());
+        cv.put("tanggal_lahir", tanggalLahir.trim());
+
+        int result = db.update("pengguna", cv, "id_pengguna = ?",
+                new String[]{String.valueOf(idPengguna)});
+        return result > 0;
+    }
+
+    /**
+     * Update Kontak dan Alamat (Email, No Telepon, Alamat Lengkap)
+     */
+    /**
+     * Update Kontak dan Alamat Full (Termasuk Provinsi, Kabupaten, dll)
+     */
+    public boolean updateKontakAlamat(int idPengguna, String email, String noTelp,
+                                      String provinsi, String kabupaten,
+                                      String kecamatan, String desa, String alamatLengkap) {
+        android.content.ContentValues cv = new android.content.ContentValues();
+        cv.put("email", email.trim().toLowerCase());
+        cv.put("no_telp", noTelp.trim());
+        cv.put("id_provinsi", provinsi.trim());     // Menyimpan teks ke dalam database
+        cv.put("id_kabupaten", kabupaten.trim());   // Menyimpan teks ke dalam database
+        cv.put("id_kecamatan", kecamatan.trim());   // Menyimpan teks ke dalam database
+        cv.put("id_desa", desa.trim());             // Menyimpan teks ke dalam database
+        cv.put("alamat_lengkap", alamatLengkap.trim());
+
+        int result = db.update("pengguna", cv, "id_pengguna = ?",
+                new String[]{String.valueOf(idPengguna)});
+        return result > 0;
+    }
+
+    /**
+     * Update Password Pengguna
+     * @return true jika berhasil, false jika gagal
+     */
+    public boolean updatePassword(int idPengguna, String passwordBaru) {
+        android.content.ContentValues cv = new android.content.ContentValues();
+        cv.put("password", passwordBaru);
+
+        int result = db.update("pengguna", cv, "id_pengguna = ?",
+                new String[]{String.valueOf(idPengguna)});
+        return result > 0;
     }
 
     public void close() {

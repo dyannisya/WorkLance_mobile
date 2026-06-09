@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- TOOLBAR -->
+    <RelativeLayout
+        android:id="@+id/toolbar1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        android:paddingHorizontal="12dp"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/imgBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            android:background="@android:color/transparent"
+
+            android:src="@drawable/icon_back"
+            app:tint="#161E54"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginStart="50dp"
+            android:text="Profil"
+            android:textColor="#161E54"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/kelola"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginStart="50dp"
+        android:layout_below="@id/toolbar1"
+        android:text="Kontak dan Alamat"
+        android:textColor="#161E54"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/kelolainformasi"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/kelola"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_card"
+        android:padding="14dp">
+
+        <TextView
+            android:layout_width="370dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="8dp"
+            android:text="Email"
+            android:textColor="#161E54"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/input1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_card"
+            android:ems="10"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:textColorHint="#B7B3B3B3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextSizeCheck,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:layout_width="370dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="8dp"
+            android:text="Kontak"
+            android:textColor="#161E54"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/input2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_card"
+            android:ems="10"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:textColorHint="#B7B3B3B3" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/kelolakontak"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/kelolainformasi"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_card"
+        android:padding="14dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="19dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Provinsi"
+                    android:textColor="#161E54"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <EditText
+                    android:id="@+id/input3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_card"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:minHeight="48dp"
+                    android:padding="12dp"
+                    android:textColorHint="#B7B3B3B3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TextSizeCheck,SpeakableTextPresentCheck" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp">
+
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="19dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Kabupaten/Kota"
+                    android:textColor="#161E54"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <EditText
+                    android:id="@+id/input4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_card"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:minHeight="48dp"
+                    android:padding="12dp"
+                    android:textColorHint="#B7B3B3B3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TextSizeCheck,SpeakableTextPresentCheck" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="19dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Kecamatan"
+                    android:textColor="#161E54"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <EditText
+                    android:id="@+id/input5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_card"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:minHeight="48dp"
+                    android:padding="12dp"
+                    android:textColorHint="#B7B3B3B3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TextSizeCheck,SpeakableTextPresentCheck" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp">
+
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="19dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Desa/Kelurahan"
+                    android:textColor="#161E54"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <EditText
+                    android:id="@+id/input6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_card"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:minHeight="48dp"
+                    android:padding="12dp"
+                    android:textColorHint="#B7B3B3B3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TextSizeCheck,SpeakableTextPresentCheck" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="370dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="8dp"
+            android:text="Alamat"
+            android:textColor="#161E54"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/input7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_card"
+            android:ems="10"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:textColorHint="#B7B3B3B3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextSizeCheck,SpeakableTextPresentCheck" />
+
+    </LinearLayout>
+
+    <!-- TOMBOL LANJUTKAN -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLanjutkan"
+        android:layout_below="@+id/kelolakontak"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginHorizontal="14dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="14dp"
+
+        android:text="Simpan Perubahan"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+
+        android:elevation="4dp"
+        android:backgroundTint="#161E54"
+
+        app:cornerRadius="12dp"/>
+
+
+
+
+
+
+</RelativeLayout>

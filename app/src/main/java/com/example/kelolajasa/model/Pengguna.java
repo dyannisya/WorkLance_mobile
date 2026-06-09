@@ -12,15 +12,16 @@ public class Pengguna {
     private String email;
     private String password;
 
-    private int idProvinsi;
-    private int idKabupaten;
-    private int idKecamatan;
-    private int idDesa;
+    private String idProvinsi;
+    private String idKabupaten;
+    private String idKecamatan;
+    private String idDesa;
 
     private String alamatLengkap;
     private String fotoProfil;
 
-    public Pengguna(int idPengguna, int idRole, String username, String namaPengguna, String tanggalLahir, String noTelp, String email, String password, int idProvinsi, int idKabupaten, int idKecamatan, int idDesa, String alamatLengkap, String fotoProfil) {
+    // Konstruktor sudah diubah menjadi String untuk 4 variabel lokasi
+    public Pengguna(int idPengguna, int idRole, String username, String namaPengguna, String tanggalLahir, String noTelp, String email, String password, String idProvinsi, String idKabupaten, String idKecamatan, String idDesa, String alamatLengkap, String fotoProfil) {
         this.idPengguna = idPengguna;
         this.idRole = idRole;
         this.username = username;
@@ -101,35 +102,36 @@ public class Pengguna {
         this.password = password;
     }
 
-    public int getIdProvinsi() {
+    // Getter dan Setter untuk lokasi sudah diubah menjadi String
+    public String getIdProvinsi() {
         return idProvinsi;
     }
 
-    public void setIdProvinsi(int idProvinsi) {
+    public void setIdProvinsi(String idProvinsi) {
         this.idProvinsi = idProvinsi;
     }
 
-    public int getIdKabupaten() {
+    public String getIdKabupaten() {
         return idKabupaten;
     }
 
-    public void setIdKabupaten(int idKabupaten) {
+    public void setIdKabupaten(String idKabupaten) {
         this.idKabupaten = idKabupaten;
     }
 
-    public int getIdKecamatan() {
+    public String getIdKecamatan() {
         return idKecamatan;
     }
 
-    public void setIdKecamatan(int idKecamatan) {
+    public void setIdKecamatan(String idKecamatan) {
         this.idKecamatan = idKecamatan;
     }
 
-    public int getIdDesa() {
+    public String getIdDesa() {
         return idDesa;
     }
 
-    public void setIdDesa(int idDesa) {
+    public void setIdDesa(String idDesa) {
         this.idDesa = idDesa;
     }
 

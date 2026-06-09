@@ -114,6 +114,32 @@ public class LayananDAO {
         return list;
     }
 
+    public List<LayananDisplay> getByKategori(int idKategori) {
+        List<LayananDisplay> list = new ArrayList<>();
+        String sql =
+                BASE_DISPLAY_SQL +
+                        "WHERE j.id_kategori = ? " +
+                        "GROUP BY l.id_layanan " +
+                        "ORDER BY avg_rating DESC";
+
+        Cursor c = null;
+        try {
+            c = db.rawQuery(sql, new String[]{String.valueOf(idKategori)});
+            if (c != null && c.moveToFirst()) {
+                do {
+                    list.add(
+                            cursorToDisplay(c)
+                    );
+                } while (c.moveToNext());
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+        }
+        return list;
+    }
+
     /**
      * Cari layanan berdasarkan id_jasa (kategori).
      * Dipakai DashboardActivity saat user klik chip kategori.
@@ -257,4 +283,5 @@ public class LayananDAO {
     }
 
     public SQLiteDatabase getDb() { return db; }
+
 }

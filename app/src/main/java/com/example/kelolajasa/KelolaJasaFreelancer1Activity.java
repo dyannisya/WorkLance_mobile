@@ -46,15 +46,27 @@ public class KelolaJasaFreelancer1Activity extends AppCompatActivity {
                         dao.getByPengguna(sessionManager.getIdPengguna());
                 dao.close();
 
-                if (existing != null && existing.getStatus().equals("Menunggu")) {
-                    Toast.makeText(this,
-                            "Pengajuan Anda sedang ditinjau admin. Harap tunggu.",
-                            Toast.LENGTH_LONG).show();
-                } else if (existing != null && existing.getStatus().equals("Diterima")) {
-                    Toast.makeText(this, "Pengajuan Anda telah diterima. Silakan login ulang.",
-                            Toast.LENGTH_LONG).show();
+                // Jika data pengajuan ditemukan di database
+                if (existing != null && existing.getStatus() != null) {
+                    String status = existing.getStatus();
+
+                    // Gunakan equalsIgnoreCase agar aman dari perbedaan huruf besar/kecil
+                    if (status.equalsIgnoreCase("Menunggu") || status.equalsIgnoreCase("Pending")) {
+                        Toast.makeText(this,
+                                "Pengajuan Anda sedang ditinjau admin. Harap tunggu.",
+                                Toast.LENGTH_LONG).show();
+
+                    } else if (status.equalsIgnoreCase("Diterima")) {
+                        Toast.makeText(this,
+                                "Pengajuan Anda telah diterima. Silakan login ulang.",
+                                Toast.LENGTH_LONG).show();
+
+                    } else {
+                        // Jika statusnya "Ditolak" atau lainnya, izinkan daftar lagi
+                        startActivity(new Intent(this, DaftarFreelancerActivity.class));
+                    }
                 } else {
-                    // Buka form pengajuan
+                    // Jika belum ada data pengajuan sama sekali (existing == null)
                     startActivity(new Intent(this, DaftarFreelancerActivity.class));
                 }
             });

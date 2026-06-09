@@ -52,6 +52,10 @@
         <activity android:name=".KelolaJasaFreelancer2Activity" android:exported="false" />
         <activity android:name=".EditJasaFreelancerActivity" android:exported="false" />
         <activity android:name=".ProfilActivity" android:exported="false" />
+        <activity android:name=".LayananKategoriActivity"/>
+        <activity android:name=".ProfilInformasiAkunActivity" android:exported="false" />
+        <activity android:name=".ProfilKontakAlamatActivity" android:exported="false" />
+        <activity android:name=".ProfilKeamananActivity" android:exported="false" />
     </application>
 
 </manifest>

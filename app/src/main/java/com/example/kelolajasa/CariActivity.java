@@ -54,7 +54,7 @@ public class CariActivity extends AppCompatActivity {
         editTextText3 = findViewById(R.id.editTextText3);
         filter = findViewById(R.id.filter);
         rekomendasi = findViewById(R.id.rekomendasi);
-        riwayat = findViewById(R.id.riwayat);
+//        riwayat = findViewById(R.id.riwayat);
         recyclerViewHasil = findViewById(R.id.recyclerViewHasil);
         tvEmptyHasil = findViewById(R.id.tvEmptyHasil);
         btncari = findViewById(R.id.btncari);
@@ -81,34 +81,37 @@ public class CariActivity extends AppCompatActivity {
     }
 
     private void setupKategoriChips() {
-        // IDs chip tidak ada, kita pakai kategori dari DB untuk filter
-        // Biarkan chip statis berfungsi sebagai search shortcut
-        // Chip di kategorirekom tidak punya ID, kita pakai onTouch pada parent
         LinearLayout kat1 = findViewById(R.id.kategorirekom);
         LinearLayout kat2 = findViewById(R.id.kategorirekom2);
 
+        // Buat satu listener yang rapi untuk semua chip
+        View.OnClickListener chipClickListener = v -> {
+            if (v instanceof TextView) {
+                String label = ((TextView) v).getText().toString();
+
+                // 1. Masukkan teks ke dalam kotak pencarian
+                editTextText3.setText(label);
+
+                // 2. Geser kursor ke akhir kata agar UX lebih baik
+                editTextText3.setSelection(label.length());
+
+                // Catatan: Tidak perlu memanggil performSearch(label) di sini.
+                // editTextText3.setText(label) akan memicu TextWatcher,
+                // dan TextWatcher yang akan mengeksekusi performSearch().
+            }
+        };
+
+        // Pasangkan listener ke setiap TextView di dalam LinearLayout kat1
         if (kat1 != null) {
             for (int i = 0; i < kat1.getChildCount(); i++) {
-                View child = kat1.getChildAt(i);
-                if (child instanceof TextView) {
-                    String label = ((TextView) child).getText().toString();
-                    child.setOnClickListener(v -> {
-                        editTextText3.setText(label);
-                        performSearch(label);
-                    });
-                }
+                kat1.getChildAt(i).setOnClickListener(chipClickListener);
             }
         }
+
+        // Pasangkan listener ke setiap TextView di dalam LinearLayout kat2
         if (kat2 != null) {
             for (int i = 0; i < kat2.getChildCount(); i++) {
-                View child = kat2.getChildAt(i);
-                if (child instanceof TextView) {
-                    String label = ((TextView) child).getText().toString();
-                    child.setOnClickListener(v -> {
-                        editTextText3.setText(label);
-                        performSearch(label);
-                    });
-                }
+                kat2.getChildAt(i).setOnClickListener(chipClickListener);
             }
         }
     }

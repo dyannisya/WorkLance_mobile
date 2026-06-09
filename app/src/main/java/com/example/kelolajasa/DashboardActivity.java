@@ -25,8 +25,9 @@ public class DashboardActivity extends AppCompatActivity {
 
     EditText etSearch;
     ImageView imgAvatar, btncari, btnbag, btnhome, btnriwayat, btnprofil;
-    LinearLayout card1;
-
+    LinearLayout kategoriDesain, kategoriTeknisi, kategoriFoto, kategoriPendidikan, kategoriIT, kategoriRumah, kategoriKonstruksi, kategoriEvent;
+    RecyclerView rvFreelancerUnggulan;
+    com.example.kelolajasa.database.PenggunaDAO penggunaDAO;
     private RecyclerView rvLayananDashboard;
 
     SessionManager sessionManager;
@@ -53,7 +54,7 @@ public class DashboardActivity extends AppCompatActivity {
         initViews();
         setupSearch();
         setupBottomNav();
-        setupContentClicks();
+        setupKategoriClick();
     }
 
     private void loadFirstLayananId() {
@@ -76,9 +77,77 @@ public class DashboardActivity extends AppCompatActivity {
         btnhome    = findViewById(R.id.btnhome);
         btnriwayat = findViewById(R.id.btnriwayat);
         btnprofil  = findViewById(R.id.btnprofil);
-        card1      = findViewById(R.id.card1);
         rvLayananDashboard = findViewById(R.id.rvLayananDashboard);
         loadDashboardLayanan();
+        kategoriDesain = findViewById(R.id.kategoriDesain);
+        kategoriTeknisi = findViewById(R.id.kategoriTeknisi);
+        kategoriFoto = findViewById(R.id.kategoriFoto);
+        kategoriPendidikan = findViewById(R.id.kategoriPendidikan);
+        kategoriIT = findViewById(R.id.kategoriIT);
+        kategoriRumah = findViewById(R.id.kategoriRumah);
+        kategoriKonstruksi = findViewById(R.id.kategoriKonstruksi);
+        kategoriEvent = findViewById(R.id.kategoriEvent);
+        rvFreelancerUnggulan = findViewById(R.id.rvFreelancerUnggulan);
+        penggunaDAO = new com.example.kelolajasa.database.PenggunaDAO(this);
+        java.util.List<com.example.kelolajasa.model.Pengguna> listFreelancer = penggunaDAO.getFreelancerUnggulan();
+        if (listFreelancer != null && !listFreelancer.isEmpty()) {
+            com.example.kelolajasa.adapter.FreelancerUnggulanAdapter adapterFreelancer =
+                    new com.example.kelolajasa.adapter.FreelancerUnggulanAdapter(listFreelancer);
+
+            // Layout Manager Horizontal sudah kita set di XML, jadi langsung set adapter saja
+            rvFreelancerUnggulan.setAdapter(adapterFreelancer);
+        }
+    }
+
+    private void setupKategoriClick() {
+
+        kategoriDesain.setOnClickListener(v ->
+                bukaKategori(1,"Desain & Kreatif"));
+
+        kategoriTeknisi.setOnClickListener(v ->
+                bukaKategori(2,"Teknisi & Perbaikan"));
+
+        kategoriFoto.setOnClickListener(v ->
+                bukaKategori(3,"Fotografi & Videografi"));
+
+        kategoriPendidikan.setOnClickListener(v ->
+                bukaKategori(4,"Pendidikan & Les Privat"));
+
+        kategoriIT.setOnClickListener(v ->
+                bukaKategori(5,"IT & Digital"));
+
+        kategoriRumah.setOnClickListener(v ->
+                bukaKategori(6,"Rumah Tangga"));
+
+        kategoriKonstruksi.setOnClickListener(v ->
+                bukaKategori(7,"Tukang & Konstruksi"));
+
+        kategoriEvent.setOnClickListener(v ->
+                bukaKategori(8,"Event & Hiburan"));
+    }
+
+    private void bukaKategori(
+            int idKategori,
+            String namaKategori
+    ) {
+
+        Intent intent =
+                new Intent(
+                        this,
+                        LayananKategoriActivity.class
+                );
+
+        intent.putExtra(
+                "id_kategori",
+                idKategori
+        );
+
+        intent.putExtra(
+                "nama_kategori",
+                namaKategori
+        );
+
+        startActivity(intent);
     }
 
     private void loadDashboardLayanan() {
@@ -166,19 +235,6 @@ public class DashboardActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("Tutup", null)
                 .show();
-    }
-
-    private void setupContentClicks() {
-        if (card1 == null) return;
-        card1.setOnClickListener(v -> {
-            if (firstLayananId == -1) {
-                Toast.makeText(this, "Belum ada layanan tersedia", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            Intent intent = new Intent(this, PemesananActivity.class);
-            intent.putExtra("id_layanan", firstLayananId);
-            startActivity(intent);
-        });
     }
 
     private String getRoleLabel(int idRole) {

@@ -18,6 +18,7 @@ import com.example.kelolajasa.database.JasaDAO;
 import com.example.kelolajasa.database.KategoriDAO;
 import com.example.kelolajasa.database.LayananDAO;
 import com.example.kelolajasa.database.PengajuanFreelancerDAO;
+import com.example.kelolajasa.database.PenggunaDAO;
 import com.example.kelolajasa.database.SatuanDAO;
 import com.example.kelolajasa.model.Jasa;
 import com.example.kelolajasa.model.Kategori;
@@ -29,7 +30,7 @@ import java.util.List;
 public class DaftarFreelancerActivity extends AppCompatActivity {
 
     // Views (dari daftar_freelancer.xml)
-    private TextView tvBack;
+    private TextView tvBack, tvNamaPengguna;
     private Spinner spinnerKategori, spinnerJasa, spinnerTipeHarga;
     private EditText etHarga, etNamaJasa, etDeskripsi;
     private Button btnDaftarSimpan;
@@ -75,6 +76,9 @@ public class DaftarFreelancerActivity extends AppCompatActivity {
 
     private void initViews() {
         tvBack          = findViewById(R.id.tvBack);
+        // 1. Tambahkan pencarian ID TextView
+        tvNamaPengguna  = findViewById(R.id.tvNamaPengguna);
+
         spinnerKategori = findViewById(R.id.spinnerKategori);
         spinnerJasa     = findViewById(R.id.spinnerJasa);
         spinnerTipeHarga= findViewById(R.id.spinnerTipeHarga);
@@ -82,6 +86,17 @@ public class DaftarFreelancerActivity extends AppCompatActivity {
         etNamaJasa      = findViewById(R.id.etNamaJasa);
         etDeskripsi     = findViewById(R.id.etDeskripsi);
         btnDaftarSimpan = findViewById(R.id.btnDaftarSimpan);
+
+        // 2. Logika untuk mengambil nama asli pengguna dari PenggunaDAO
+        PenggunaDAO penggunaDAO = new PenggunaDAO(this);
+        com.example.kelolajasa.model.Pengguna pengguna = penggunaDAO.getPenggunaById(sessionManager.getIdPengguna());
+
+        if (pengguna != null && tvNamaPengguna != null) {
+            // Gunakan getter dari model Pengguna milikmu (bisa getNamaPengguna() atau getNama())
+            // Jika error merah, sesuaikan dengan nama method di dalam file Pengguna.java
+            tvNamaPengguna.setText(pengguna.getNamaPengguna());
+        }
+        penggunaDAO.close(); // Tutup koneksi untuk menghindari kebocoran memori
 
         if (tvBack != null) tvBack.setOnClickListener(v -> onBackPressed());
 

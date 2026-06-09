@@ -143,11 +143,14 @@
                     android:paddingVertical="8dp">
 
                     <LinearLayout
+                        android:id="@+id/btnEditProfil"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingHorizontal="20dp">
+                        android:paddingHorizontal="20dp"
+                        android:clickable="true"
+                        android:focusable="true">
 
                         <ImageView
                             android:layout_width="20dp"
@@ -172,11 +175,14 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btnKontakAlamat"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingHorizontal="20dp">
+                        android:paddingHorizontal="20dp"
+                        android:clickable="true"
+                        android:focusable="true">
 
                         <ImageView
                             android:layout_width="20dp"
@@ -201,11 +207,14 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btnKeamanan"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingHorizontal="20dp">
+                        android:paddingHorizontal="20dp"
+                        android:clickable="true"
+                        android:focusable="true">
 
                         <ImageView
                             android:layout_width="20dp"

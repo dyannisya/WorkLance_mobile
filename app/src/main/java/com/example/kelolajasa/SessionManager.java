@@ -54,8 +54,18 @@ public class SessionManager {
         return pref.getString(KEY_NAMA, "");
     }
 
+    public void setNamaPengguna(String nama) {
+        editor.putString(KEY_NAMA, nama);
+        editor.apply();
+    }
+
     public String getEmail() {
         return pref.getString(KEY_EMAIL, "");
+    }
+
+    public void setEmail(String email) {
+        editor.putString(KEY_EMAIL, email); // Pastikan KEY_EMAIL sesuai dengan variabel string kamu
+        editor.apply();
     }
 
     public void logout() {

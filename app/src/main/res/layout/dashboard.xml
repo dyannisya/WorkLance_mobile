@@ -216,6 +216,7 @@
 
                         <!-- Kategori 1 -->
                         <LinearLayout
+                            android:id="@+id/kategoriDesain"
                             android:layout_width="72dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
@@ -243,6 +244,7 @@
 
                         <!-- Kategori 2 -->
                         <LinearLayout
+                            android:id="@+id/kategoriTeknisi"
                             android:layout_width="72dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
@@ -270,6 +272,7 @@
 
                         <!-- Kategori 3 -->
                         <LinearLayout
+                            android:id="@+id/kategoriFoto"
                             android:layout_width="72dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
@@ -297,6 +300,7 @@
 
                         <!-- Kategori 4 -->
                         <LinearLayout
+                            android:id="@+id/kategoriPendidikan"
                             android:layout_width="72dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
@@ -331,6 +335,7 @@
 
                         <!-- Kategori 5 -->
                         <LinearLayout
+                            android:id="@+id/kategoriIT"
                             android:layout_width="72dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
@@ -358,6 +363,7 @@
 
                         <!-- Kategori 6 -->
                         <LinearLayout
+                            android:id="@+id/kategoriRumah"
                             android:layout_width="72dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
@@ -385,6 +391,7 @@
 
                         <!-- Kategori 7 -->
                         <LinearLayout
+                            android:id="@+id/kategoriKonstruksi"
                             android:layout_width="72dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
@@ -412,6 +419,7 @@
 
                         <!-- Kategori 8 -->
                         <LinearLayout
+                            android:id="@+id/kategoriEvent"
                             android:layout_width="72dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -449,157 +457,16 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <HorizontalScrollView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvFreelancerUnggulan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:clipToPadding="false"
                 android:paddingHorizontal="24dp"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="230dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="12dp"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="2dp"
-                        app:cardUseCompatPadding="true">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg_card"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="85dp"
-                                android:layout_height="match_parent"
-                                android:minHeight="95dp"
-                                android:scaleType="centerCrop"
-                                android:src="@android:drawable/ic_menu_gallery" />
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:padding="12dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:drawableStart="@drawable/ic_bintang"
-                                    android:drawablePadding="4dp"
-                                    android:text="4.5"
-                                    android:textColor="#F16D34"
-                                    android:textSize="11sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
-                                    android:text="Andi Wijaya"
-                                    android:textColor="#1A1A2E"
-                                    android:textSize="13sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Desain Kreatif"
-                                    android:textColor="#757575"
-                                    android:textSize="11sp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="6dp"
-                                    android:drawableStart="@drawable/ic_location"
-                                    android:drawablePadding="4dp"
-                                    android:text="Sidoarjo"
-                                    android:textColor="#DD2C00"
-                                    android:textSize="11sp"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="230dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="12dp"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="2dp"
-                        app:cardUseCompatPadding="true">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg_card"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="85dp"
-                                android:layout_height="match_parent"
-                                android:minHeight="95dp"
-                                android:scaleType="centerCrop"
-                                android:src="@android:drawable/ic_menu_gallery" />
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:padding="12dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:drawableStart="@drawable/ic_bintang"
-                                    android:drawablePadding="4dp"
-                                    android:text="4.5"
-                                    android:textColor="#F16D34"
-                                    android:textSize="11sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
-                                    android:text="Rizky Pratama"
-                                    android:textColor="#1A1A2E"
-                                    android:textSize="13sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="IT Desain"
-                                    android:textColor="#757575"
-                                    android:textSize="11sp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="6dp"
-                                    android:drawableStart="@drawable/ic_location"
-                                    android:drawablePadding="4dp"
-                                    android:text="Surabaya"
-                                    android:textColor="#DD2C00"
-                                    android:textSize="11sp"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                </LinearLayout>
-            </HorizontalScrollView>
+                android:paddingBottom="12dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         </LinearLayout>
     </ScrollView>
