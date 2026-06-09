@@ -133,12 +133,22 @@ public class KelolaPenggunaActivity extends AppCompatActivity {
             }
             @Override
             public void onLihat(Pengguna p) {
+                StringBuilder message = new StringBuilder();
+                message.append("Username: ").append(p.getUsername())
+                        .append("\nEmail: ").append(p.getEmail())
+                        .append("\nNo. Telp: ").append(p.getNoTelp());
+
+                // UBAH ANGKA 2 MENJADI 3 (Karena Role 3 adalah Freelancer di databasemu)
+                if (p.getIdRole() == 3) {
+                    String infoTambahan = penggunaDAO.getInfoFreelancer(p.getIdPengguna());
+                    message.append(infoTambahan);
+                }
+
                 new AlertDialog.Builder(KelolaPenggunaActivity.this)
                         .setTitle(p.getNamaPengguna())
-                        .setMessage("Username: " + p.getUsername()
-                                + "\nEmail: " + p.getEmail()
-                                + "\nNo. Telp: " + p.getNoTelp())
-                        .setPositiveButton("Tutup", null).show();
+                        .setMessage(message.toString())
+                        .setPositiveButton("Tutup", null)
+                        .show();
             }
         });
         recyclerView.setAdapter(adapter);

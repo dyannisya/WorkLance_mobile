@@ -268,6 +268,48 @@ public class PenggunaDAO {
         return result > 0;
     }
 
+    // Ubah fungsi ini di PenggunaDAO.java
+    public String getInfoFreelancer(int idPengguna) {
+        String info = "";
+        Cursor cursor = null;
+
+        try {
+            // Gunakan SELECT * agar tidak crash jika ada nama kolom yang berbeda
+            String query = "SELECT * FROM pengajuan_freelancer WHERE id_pengguna = ?";
+            cursor = db.rawQuery(query, new String[]{String.valueOf(idPengguna)});
+
+            if (cursor != null && cursor.moveToFirst()) {
+                // Ambil data menggunakan nama kolom persis seperti di database kamu
+                String nik = cursor.getString(cursor.getColumnIndexOrThrow("nik"));
+                String deskripsi = cursor.getString(cursor.getColumnIndexOrThrow("deskripsi"));
+
+                // Jika nama kolom statusmu bukan status_pengajuan (misal cuma 'status'), ini tetap aman
+                int idxStatus = cursor.getColumnIndex("status_pengajuan");
+                if (idxStatus == -1) idxStatus = cursor.getColumnIndex("status");
+                String status = (idxStatus != -1) ? cursor.getString(idxStatus) : "-";
+
+                // Pengecekan kolom tanggal yang aman
+                int idxTanggal = cursor.getColumnIndex("tanggal_pengajuan");
+                if (idxTanggal == -1) idxTanggal = cursor.getColumnIndex("tanggal");
+                String tanggal = (idxTanggal != -1) ? cursor.getString(idxTanggal) : "-";
+
+                info = "\n\n-- Info Freelancer --" +
+                        "\nNIK: " + nik +
+                        "\nStatus: " + status + " (" + tanggal + ")" +
+                        "\nDeskripsi: " + deskripsi;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            info = "\n\n(Gagal memuat detail pengajuan freelancer)";
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return info;
+    }
+
     public void close() {
         if (db != null && db.isOpen()) db.close();
     }

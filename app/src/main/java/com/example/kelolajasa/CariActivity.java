@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +21,7 @@ import com.example.kelolajasa.adapter.LayananCariAdapter;
 import com.example.kelolajasa.database.LayananDAO;
 import com.example.kelolajasa.model.LayananDisplay;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CariActivity extends AppCompatActivity {
@@ -31,6 +34,34 @@ public class CariActivity extends AppCompatActivity {
 
     LayananDAO layananDAO;
     LayananCariAdapter adapter;
+
+    // Variabel untuk menyimpan status filter saat ini
+    private String filterLokasi = "";
+    private int filterMinHarga = 0;
+    private int filterMaxHarga = Integer.MAX_VALUE; // Default tak terhingga
+
+    // Launcher untuk menangkap data kembalian dari FilterCariActivity
+    private final ActivityResultLauncher<Intent> filterLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    Intent data = result.getData();
+
+                    // Ambil data filter yang dikirim
+                    filterLokasi = data.getStringExtra("lokasi");
+                    String minStr = data.getStringExtra("min_harga");
+                    String maxStr = data.getStringExtra("max_harga");
+
+                    // Konversi string harga ke integer (jika kosong, kembalikan ke default)
+                    filterMinHarga = (minStr != null && !minStr.isEmpty()) ? Integer.parseInt(minStr) : 0;
+                    filterMaxHarga = (maxStr != null && !maxStr.isEmpty()) ? Integer.parseInt(maxStr) : Integer.MAX_VALUE;
+
+                    // Jalankan ulang pencarian agar filter langsung diterapkan
+                    String currentQuery = editTextText3.getText().toString().trim();
+                    performSearch(currentQuery);
+                }
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +104,12 @@ public class CariActivity extends AppCompatActivity {
             recyclerViewHasil.setAdapter(adapter);
         }
 
-        if (filter != null) filter.setOnClickListener(v ->
-                Toast.makeText(this, "Filter — Coming Soon", Toast.LENGTH_SHORT).show());
+        // Panggil FilterCariActivity menggunakan filterLauncher (bukan startActivity biasa)
+        if (filter != null) filter.setOnClickListener(v -> {
+            Intent intent = new Intent(this, FilterCariActivity.class);
+            filterLauncher.launch(intent);
+        });
 
-        // Klik pada chip rekomendasi kategori
         setupKategoriChips();
     }
 
@@ -84,31 +117,20 @@ public class CariActivity extends AppCompatActivity {
         LinearLayout kat1 = findViewById(R.id.kategorirekom);
         LinearLayout kat2 = findViewById(R.id.kategorirekom2);
 
-        // Buat satu listener yang rapi untuk semua chip
         View.OnClickListener chipClickListener = v -> {
             if (v instanceof TextView) {
                 String label = ((TextView) v).getText().toString();
-
-                // 1. Masukkan teks ke dalam kotak pencarian
                 editTextText3.setText(label);
-
-                // 2. Geser kursor ke akhir kata agar UX lebih baik
                 editTextText3.setSelection(label.length());
-
-                // Catatan: Tidak perlu memanggil performSearch(label) di sini.
-                // editTextText3.setText(label) akan memicu TextWatcher,
-                // dan TextWatcher yang akan mengeksekusi performSearch().
             }
         };
 
-        // Pasangkan listener ke setiap TextView di dalam LinearLayout kat1
         if (kat1 != null) {
             for (int i = 0; i < kat1.getChildCount(); i++) {
                 kat1.getChildAt(i).setOnClickListener(chipClickListener);
             }
         }
 
-        // Pasangkan listener ke setiap TextView di dalam LinearLayout kat2
         if (kat2 != null) {
             for (int i = 0; i < kat2.getChildCount(); i++) {
                 kat2.getChildAt(i).setOnClickListener(chipClickListener);
@@ -121,7 +143,8 @@ public class CariActivity extends AppCompatActivity {
             @Override public void beforeTextChanged(CharSequence s, int st, int c, int a) {}
             @Override public void onTextChanged(CharSequence s, int start, int b, int c) {
                 String query = s.toString().trim();
-                if (query.isEmpty()) {
+                // Jika pencarian kosong DAN tidak ada filter, tampilkan rekomendasi awal
+                if (query.isEmpty() && filterLokasi.isEmpty() && filterMinHarga == 0 && filterMaxHarga == Integer.MAX_VALUE) {
                     showDefaultState();
                 } else {
                     performSearch(query);
@@ -132,8 +155,43 @@ public class CariActivity extends AppCompatActivity {
     }
 
     private void performSearch(String query) {
+        // 1. Ambil data pencarian mentah dari database
         List<LayananDisplay> results = layananDAO.searchDisplay(query);
-        showSearchState(results);
+
+        // 2. Jika tidak ada filter yang aktif, langsung tampilkan
+        if (filterLokasi.isEmpty() && filterMinHarga == 0 && filterMaxHarga == Integer.MAX_VALUE) {
+            showSearchState(results);
+            return;
+        }
+
+        // 3. Terapkan filter lokasi dan harga secara manual
+        List<LayananDisplay> filteredResults = new ArrayList<>();
+        if (results != null) {
+            for (LayananDisplay item : results) {
+                boolean matchLokasi = true;
+                boolean matchHarga = true;
+
+                // Cek Lokasi (Pastikan getLokasi() ada di model LayananDisplay kamu)
+                if (filterLokasi != null && !filterLokasi.isEmpty()) {
+                    if (item.getLokasiKabupaten() == null || !item.getLokasiKabupaten().toLowerCase().contains(filterLokasi.toLowerCase())) {
+                        matchLokasi = false;
+                    }
+                }
+
+                // Cek Harga (Pastikan getHarga() ada di model LayananDisplay kamu dan bertipe int/double)
+                if (item.getHarga() < filterMinHarga || item.getHarga() > filterMaxHarga) {
+                    matchHarga = false;
+                }
+
+                // Jika lolos kedua tes filter, masukkan ke hasil akhir
+                if (matchLokasi && matchHarga) {
+                    filteredResults.add(item);
+                }
+            }
+        }
+
+        // 4. Tampilkan hasil yang sudah di-filter
+        showSearchState(filteredResults);
     }
 
     private void showDefaultState() {
@@ -176,6 +234,10 @@ public class CariActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (editTextText3 != null && !editTextText3.getText().toString().isEmpty()) {
             editTextText3.setText("");
+            // Reset filter juga jika pengguna kembali
+            filterLokasi = "";
+            filterMinHarga = 0;
+            filterMaxHarga = Integer.MAX_VALUE;
             showDefaultState();
         } else {
             super.onBackPressed();

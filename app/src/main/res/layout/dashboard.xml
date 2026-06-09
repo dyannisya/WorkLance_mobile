@@ -5,37 +5,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:fitsSystemWindows="true"> <LinearLayout
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="#FFFFFF"
+    android:elevation="4dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#FFFFFF"
-        android:elevation="4dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:scaleType="fitStart"
+        android:src="@drawable/ic_logodashboard" />
 
-        <ImageView
-            android:id="@+id/imgLogo"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:scaleType="fitStart"
-            android:src="@drawable/ic_logodashboard" />
-
-        <ImageView
-            android:id="@+id/imgAvatar"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/ic_avatar" />
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/imgAvatar"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_avatar" />
+</LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -106,7 +105,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="230dp"
                 android:background="#161E54"
                 android:orientation="vertical"
                 android:paddingStart="24dp"
@@ -183,7 +182,6 @@
                 android:paddingEnd="24dp"
                 android:clipToPadding="false"/>
 
-            <!-- ===== SECTION: Kategori ===== -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -207,14 +205,12 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!-- Baris 1 -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:orientation="horizontal">
 
-                        <!-- Kategori 1 -->
                         <LinearLayout
                             android:id="@+id/kategoriDesain"
                             android:layout_width="72dp"
@@ -242,7 +238,6 @@
                                 android:textSize="11sp" />
                         </LinearLayout>
 
-                        <!-- Kategori 2 -->
                         <LinearLayout
                             android:id="@+id/kategoriTeknisi"
                             android:layout_width="72dp"
@@ -270,7 +265,6 @@
                                 android:textSize="11sp" />
                         </LinearLayout>
 
-                        <!-- Kategori 3 -->
                         <LinearLayout
                             android:id="@+id/kategoriFoto"
                             android:layout_width="72dp"
@@ -298,7 +292,6 @@
                                 android:textSize="11sp" />
                         </LinearLayout>
 
-                        <!-- Kategori 4 -->
                         <LinearLayout
                             android:id="@+id/kategoriPendidikan"
                             android:layout_width="72dp"
@@ -327,13 +320,11 @@
                         </LinearLayout>
                     </LinearLayout>
 
-                    <!-- Baris 2 -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <!-- Kategori 5 -->
                         <LinearLayout
                             android:id="@+id/kategoriIT"
                             android:layout_width="72dp"
@@ -361,7 +352,6 @@
                                 android:textSize="11sp" />
                         </LinearLayout>
 
-                        <!-- Kategori 6 -->
                         <LinearLayout
                             android:id="@+id/kategoriRumah"
                             android:layout_width="72dp"
@@ -389,7 +379,6 @@
                                 android:textSize="11sp" />
                         </LinearLayout>
 
-                        <!-- Kategori 7 -->
                         <LinearLayout
                             android:id="@+id/kategoriKonstruksi"
                             android:layout_width="72dp"
@@ -417,7 +406,6 @@
                                 android:textSize="11sp" />
                         </LinearLayout>
 
-                        <!-- Kategori 8 -->
                         <LinearLayout
                             android:id="@+id/kategoriEvent"
                             android:layout_width="72dp"

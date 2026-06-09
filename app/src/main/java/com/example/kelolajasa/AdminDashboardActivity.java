@@ -2,9 +2,6 @@ package com.example.kelolajasa;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -189,12 +186,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
     }
 
     private void setupBottomNav() {
-        // Admin bottom nav:
-        // btncari(ic_klpengguna) → KelolaPenggunaActivity
-        // btnbag(ic_bag)         → KelolaJasaActivity
-        // btnhome(ic_dashboard)  → AdminDashboardActivity (sudah di sini)
-        // btnriwayat(ic_booking) → KelolaBookingActivity
-        // btnprofil(ic_pengajuan)→ KelolaPengajuanActivity
 
         if (btncari != null) btncari.setOnClickListener(v ->
                 startActivity(new Intent(this, KelolaPenggunaActivity.class)));

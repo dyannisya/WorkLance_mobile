@@ -223,7 +223,7 @@ public class RiwayatPesananActivity extends AppCompatActivity {
         if (btnriwayat != null) btnriwayat.setOnClickListener(v ->
                 Toast.makeText(this, "Riwayat Pesanan", Toast.LENGTH_SHORT).show());
         if (btnprofil != null) btnprofil.setOnClickListener(v ->
-                Toast.makeText(this, "Profil — Coming Soon", Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(this, ProfilActivity.class)));
     }
 
     @Override
